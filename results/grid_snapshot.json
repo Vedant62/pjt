@@ -1,0 +1,261 @@
+{
+  "script": "sim/src/grid-snapshot.ts",
+  "generatedAt": "2026-10-16T06:03:08.070Z",
+  "git": {
+    "commit": "9f2b0ce",
+    "dirty": true
+  },
+  "baseUrl": "https://api.aipowergrid.io",
+  "summary": {
+    "workersOnline": 8,
+    "textModelsOnline": [
+      "qwen38-flash-next-uncensored-125b-nvfp4",
+      "gpt-oss-120b",
+      "deepseek-v4-flash-nvfp4"
+    ],
+    "qwen3WorkerOnline": false,
+    "workersOnlineNote": "count of entries returned by /v1/workers",
+    "ourWorkers": null,
+    "ourWorkersNote": "set AIPG_OUR_WORKERS=<name,…> to identify our worker(s)"
+  },
+  "workers": {
+    "status": 200,
+    "ms": 1113,
+    "body": {
+      "count": 8,
+      "workers": [
+        {
+          "id": "d689e61c-340d-4402-bc43-6f8c170c3e93",
+          "name": "aipg-ltx25-rig-gpu0",
+          "models": [
+            "LTX-2.5 Distilled BF16"
+          ],
+          "job_types": [
+            "video"
+          ],
+          "online": true
+        },
+        {
+          "id": "c3e150e4-2e74-486b-b854-44f7cf8c574c",
+          "name": "qwen38-flash-next-uncensored-125b-nvfp4-v100x4",
+          "models": [
+            "qwen38-flash-next-uncensored-125b-nvfp4"
+          ],
+          "job_types": [
+            "text"
+          ],
+          "online": true
+        },
+        {
+          "id": "18fd248b-ca5d-47d2-9d28-1bccc6951ce3",
+          "name": "half5090beast1",
+          "models": [
+            "z-image-turbo",
+            "FLUX.2 Klein 4B FP8",
+            "Krea 2 Turbo"
+          ],
+          "job_types": [
+            "image"
+          ],
+          "online": true
+        },
+        {
+          "id": "87495ad5-e6cd-49b6-b01d-252011a9c6bc",
+          "name": "rack-gptoss-worker-gpt-oss-120b",
+          "models": [
+            "gpt-oss-120b"
+          ],
+          "job_types": [
+            "text"
+          ],
+          "online": true
+        },
+        {
+          "id": "86fcc746-b564-4961-84dd-5e53646d4c78",
+          "name": "rack-gptoss-worker-deepseek-v4-flash-nvfp4",
+          "models": [
+            "deepseek-v4-flash-nvfp4"
+          ],
+          "job_types": [
+            "text"
+          ],
+          "online": true
+        },
+        {
+          "id": "0d498cbf-e8a6-4e11-bcd0-62252e1bd9d5",
+          "name": "aipg-ltx25-rig-gpu1",
+          "models": [
+            "LTX-2.5 Distilled BF16"
+          ],
+          "job_types": [
+            "video"
+          ],
+          "online": true
+        },
+        {
+          "id": "b15ab45d-e7fe-4108-98b7-bc6c671e4ea0",
+          "name": "gorgadon-audio-3090",
+          "models": [
+            "ace-step-v1.5-xl-turbo"
+          ],
+          "job_types": [
+            "audio"
+          ],
+          "online": true
+        },
+        {
+          "id": "47ed8b38-bdc6-4db0-8b1b-cdabad440319",
+          "name": "gorgadon-ltx25-nvfp4",
+          "models": [
+            "LTX-2.5 Distilled NVFP4"
+          ],
+          "job_types": [
+            "video"
+          ],
+          "online": true
+        }
+      ]
+    }
+  },
+  "models": {
+    "status": 200,
+    "ms": 743,
+    "body": [
+      {
+        "name": "LTX-2.5 Distilled BF16",
+        "count": 2,
+        "type": "video",
+        "max_context_length": 2048,
+        "samples": 1,
+        "tokens_per_s": null,
+        "avg_ttft_s": null,
+        "avg_latency_s": 90.53,
+        "capabilities": [
+          "txt2video",
+          "img2video",
+          "audio2video",
+          "video2video"
+        ]
+      },
+      {
+        "name": "ace-step-v1.5-xl-turbo",
+        "count": 1,
+        "type": "audio",
+        "max_context_length": 2048,
+        "samples": 0,
+        "tokens_per_s": null,
+        "avg_ttft_s": null,
+        "avg_latency_s": null
+      },
+      {
+        "name": "deepseek-v4-flash-nvfp4",
+        "count": 1,
+        "type": "text",
+        "max_context_length": 262144,
+        "samples": 0,
+        "tokens_per_s": null,
+        "avg_ttft_s": null,
+        "avg_latency_s": null,
+        "pricing": {
+          "currency": "USD",
+          "input_per_mtok_usd": 0.07,
+          "output_per_mtok_usd": 0.14,
+          "source": "model",
+          "version": "2026-10-15-a"
+        }
+      },
+      {
+        "name": "FLUX.2 Klein 4B FP8",
+        "count": 1,
+        "type": "image",
+        "max_context_length": 2048,
+        "samples": 0,
+        "tokens_per_s": null,
+        "avg_ttft_s": null,
+        "avg_latency_s": null,
+        "capabilities": [
+          "txt2img",
+          "img2img"
+        ]
+      },
+      {
+        "name": "gpt-oss-120b",
+        "count": 1,
+        "type": "text",
+        "max_context_length": 60000,
+        "samples": 3,
+        "tokens_per_s": 44.1,
+        "avg_ttft_s": 0.28,
+        "avg_latency_s": 2.53,
+        "pricing": {
+          "currency": "USD",
+          "input_per_mtok_usd": 0.075,
+          "output_per_mtok_usd": 0.3,
+          "source": "model",
+          "version": "2026-10-15-a"
+        }
+      },
+      {
+        "name": "Krea 2 Turbo",
+        "count": 1,
+        "type": "image",
+        "max_context_length": 2048,
+        "samples": 0,
+        "tokens_per_s": null,
+        "avg_ttft_s": null,
+        "avg_latency_s": null,
+        "capabilities": [
+          "txt2img",
+          "img2img"
+        ]
+      },
+      {
+        "name": "LTX-2.5 Distilled NVFP4",
+        "count": 1,
+        "type": "video",
+        "max_context_length": 2048,
+        "samples": 1,
+        "tokens_per_s": null,
+        "avg_ttft_s": null,
+        "avg_latency_s": 94.54,
+        "capabilities": [
+          "txt2video",
+          "img2video",
+          "audio2video",
+          "video2video"
+        ]
+      },
+      {
+        "name": "qwen38-flash-next-uncensored-125b-nvfp4",
+        "count": 1,
+        "type": "text",
+        "max_context_length": 262144,
+        "samples": 0,
+        "tokens_per_s": null,
+        "avg_ttft_s": null,
+        "avg_latency_s": null,
+        "pricing": {
+          "currency": "USD",
+          "input_per_mtok_usd": 0.075,
+          "output_per_mtok_usd": 0.3,
+          "source": "default",
+          "version": "2026-10-15-a"
+        }
+      },
+      {
+        "name": "z-image-turbo",
+        "count": 1,
+        "type": "image",
+        "max_context_length": 2048,
+        "samples": 0,
+        "tokens_per_s": null,
+        "avg_ttft_s": null,
+        "avg_latency_s": null,
+        "capabilities": [
+          "txt2img",
+          "img2img"
+        ]
+      }
+    ]
+  }
+}

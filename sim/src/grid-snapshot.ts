@@ -23,13 +23,18 @@ async function get(path: string) {
 
 const workers = await get("/v1/workers");
 const models = await get("/v1/status/models");
-const list: any[] | null = Array.isArray(workers.body) ? (workers.body as any[]) : Array.isArray((workers.body as any)?.data) ? (workers.body as any).data : null;
+const wb = workers.body as any;
+const list: any[] | null = Array.isArray(wb) ? wb : Array.isArray(wb?.workers) ? wb.workers : Array.isArray(wb?.data) ? wb.data : null;
+const textModels = list ? [...new Set(list.filter((w) => (w.job_types ?? []).includes("text")).flatMap((w) => w.models ?? []))] : null;
+const qwen3Online = list ? list.some((w) => w.online !== false && (w.models ?? []).some((m: string) => /^qwen3:/i.test(m))) : null;
 const ours = list && OUR_WORKERS.length ? list.filter((w) => OUR_WORKERS.some((o) => [w.name, w.id].includes(o))) : null;
 
 writeResult("grid_snapshot.json", {
   ...meta("sim/src/grid-snapshot.ts", { baseUrl: BASE }),
   summary: {
-    workersOnline: list ? list.length : null,
+    workersOnline: list ? list.filter((w) => w.online !== false).length : null,
+    textModelsOnline: textModels,
+    qwen3WorkerOnline: qwen3Online,
     workersOnlineNote: list ? "count of entries returned by /v1/workers" : "could not parse /v1/workers (see raw)",
     ourWorkers: OUR_WORKERS.length ? ours : null,
     ourWorkersNote: OUR_WORKERS.length ? "matched by name/id from AIPG_OUR_WORKERS" : "set AIPG_OUR_WORKERS=<name,…> to identify our worker(s)",
