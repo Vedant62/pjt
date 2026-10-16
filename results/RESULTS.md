@@ -1,6 +1,6 @@
 # Cashew — Results
 
-Generated 2026-10-16T07:21:15.168Z at commit `27c6b56` (uncommitted changes present) by `sim/src/summarize.ts`.
+Generated 2026-10-16T07:50:21.163Z at commit `b5fc89c` (uncommitted changes present) by `sim/src/summarize.ts`.
 
 Every number below is copied from a JSON file in this directory that a script wrote while running. Anything that could not be measured is reported as **null** with the reason.
 
@@ -140,7 +140,7 @@ _Source: `sim/src/grid-snapshot.ts` at 2026-10-16T07:21:13.114Z, commit `27c6b56
 | TTFT (ms) | 4,341 | 5,345 | 4,415 | 4,635 |
 | Total (ms) | 5,829 | 6,018 | 5,006 | 5,068 |
 
-An earlier run (`gateway_bench_run1.json`, 24 requests) measured total latency only: direct p50 null ms, gateway p50 null ms (n=0 each). Its TTFT is **null**, because the bench then only counted `delta.content`, and qwen3 spent all 64 tokens on reasoning. The run above counts the first token of any kind. Bench requests across both runs: 30 (limit 30). AIPG did not return an `X-Grid-Job-ID` header, so `gridJobId` is null on every row.
+An earlier run (`gateway_bench_run1.json`, 24 requests) measured total latency only: direct median 5,008 ms, gateway median 5,053 ms (n=12 each, computed from its samples). Its TTFT is **null**, because the bench then only counted `delta.content`, and qwen3 spent all 64 tokens on reasoning. The run above counts the first token of any kind. Bench requests across both runs: 30 (limit 30). AIPG did not return an `X-Grid-Job-ID` header, so `gridJobId` is null on every row.
 
 Gateway overhead (paired, gateway − direct): TTFT p50 -818 ms, p95 205 ms. Entitlement check: uncached p50 600.16 ms (n=2), cached p50 0.01 ms (n=1).
 

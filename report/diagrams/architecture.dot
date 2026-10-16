@@ -1,0 +1,13 @@
+digraph G { graph [fontname="Times-Roman", fontsize=13, bgcolor=white, pad=0.2, nodesep=0.45, ranksep=0.55]; node [fontname="Times-Roman", fontsize=12, shape=box, style="rounded,filled", fillcolor="#ffffff", color="#444444", penwidth=1.1]; edge [fontname="Times-Roman", fontsize=10.5, color="#444444", arrowsize=0.7]; rankdir=TB; compound=true; newrank=true;
+ subgraph cluster_people { label="Participants"; style="rounded,dashed"; color="#999999";
+   sub [label="Subscriber\nwallet", shape=ellipse, fillcolor="#fdf7ef"]; prov [label="Provider /\npayee", shape=ellipse, fillcolor="#fdf7ef"]; anyk [label="Any keeper\n(permissionless)", shape=ellipse, fillcolor="#fdf7ef"]; }
+ subgraph cluster_off { label="Off-chain services (Cashew)"; style="rounded"; color="#999999";
+   dash [label="Dashboard\nNext.js 14 + wagmi"]; gw [label="Cashew Gateway\nExpress + SQLite\nSIWE · 402 · metering"]; kp [label="Keeper service\nNode + viem"]; }
+ subgraph cluster_chain { label="On-chain (Ethereum Sepolia)"; style="rounded"; color="#b86422"; fontcolor="#7a3f12";
+   usdc [label="MockUSDC\nERC-20 + ERC-2612"]; reg [label="PlanRegistry\nimmutable terms"]; vault [label="SubscriptionVault\nsubscribe · charge · cancel · withdraw", fillcolor="#f9ead6"]; roots [label="UsageRootRegistry\nMerkle root per epoch"]; }
+ subgraph cluster_aipg { label="AI Power Grid (third party)"; style="rounded,dashed"; color="#999999";
+   api [label="Grid API\n/v1/chat/completions"]; wk [label="Our GPU worker\nqwen3:8b / 4b / 1.7b"]; }
+ sub -> dash [label="permit + subscribe"]; prov -> dash [label="createPlan"]; dash -> vault; dash -> reg;
+ sub -> gw [label="SIWE · chat"]; gw -> vault [label="entitledSubOf\n(15 s cache)"]; gw -> api [label="one platform key"]; api -> wk; gw -> roots [label="commitRoot / epoch"];
+ anyk -> kp [style=dashed, arrowhead=none]; kp -> vault [label="chargeBatch"]; vault -> usdc [label="transferFrom ≤ price"]; vault -> reg [label="reads terms"];
+}

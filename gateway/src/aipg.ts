@@ -124,6 +124,7 @@ function mockCompletion(cfg: GatewayConfig, body: Record<string, unknown>, signa
 export class SseAccumulator {
   private buf = "";
   content = "";
+  reasoning = "";
   usage: { prompt_tokens: number; completion_tokens: number } | null = null;
 
   push(text: string) {
@@ -137,8 +138,10 @@ export class SseAccumulator {
       if (!data || data === "[DONE]") continue;
       try {
         const j = JSON.parse(data);
-        const delta = j.choices?.[0]?.delta?.content;
-        if (typeof delta === "string") this.content += delta;
+        const d = j.choices?.[0]?.delta ?? {};
+        if (typeof d.content === "string") this.content += d.content;
+        const r = d.reasoning_content ?? d.reasoning;
+        if (typeof r === "string") this.reasoning += r;
         if (j.usage && typeof j.usage.prompt_tokens === "number") this.usage = j.usage;
       } catch {
         /* partial or non-JSON line: ignore */

@@ -183,7 +183,8 @@ export function createGateway(cfg: GatewayConfig, opts: { dbFile?: string; log?:
         /* client went away or upstream aborted; record what we have */
       }
       res.end();
-      content = acc.content;
+      // Hash what the model produced: reasoning (qwen3 thinking) followed by the visible content.
+      content = acc.reasoning + acc.content;
       usage = acc.usage;
     } else {
       const text = await up.text();
@@ -191,7 +192,8 @@ export function createGateway(cfg: GatewayConfig, opts: { dbFile?: string; log?:
       res.status(200).type("application/json");
       try {
         const j = JSON.parse(text);
-        content = j.choices?.[0]?.message?.content ?? "";
+        const m = j.choices?.[0]?.message ?? {};
+        content = (m.reasoning_content ?? m.reasoning ?? "") + (m.content ?? "");
         usage = j.usage ?? null;
       } catch {
         content = text;

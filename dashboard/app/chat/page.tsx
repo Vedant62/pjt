@@ -49,7 +49,7 @@ export default function ChatPage() {
       const r = await fetch(`${GATEWAY_URL}/v1/chat/completions`, {
         method: "POST",
         headers: { "content-type": "application/json", authorization: `Bearer ${session.token}` },
-        body: JSON.stringify({ model, stream: true, max_tokens: 256, messages: history.map(({ role, content }) => ({ role, content })) }),
+        body: JSON.stringify({ model, stream: true, max_tokens: 256, messages: history.map(({ role, content }) => ({ role, content: content.replace(/^<think>[\s\S]*?<\/think>/, "") })) }),
       });
       if (r.status === 402) {
         const j = await r.json();
@@ -70,6 +70,7 @@ export default function ChatPage() {
       const dec = new TextDecoder();
       let buf = "";
       let content = "";
+      let reasoning = ""; // qwen3 streams its thinking separately as reasoning_content
       for (;;) {
         const { done, value } = await reader.read();
         if (done) break;
@@ -84,15 +85,16 @@ export default function ChatPage() {
           if (data === "[DONE]") continue;
           try {
             const j = JSON.parse(data);
-            const d = j.choices?.[0]?.delta?.content;
-            if (d) content += d;
+            const delta = j.choices?.[0]?.delta ?? {};
+            if (delta.reasoning_content || delta.reasoning) reasoning += delta.reasoning_content ?? delta.reasoning;
+            if (delta.content) content += delta.content;
             if (j.usage) (meta.promptTokens = j.usage.prompt_tokens), (meta.completionTokens = j.usage.completion_tokens);
           } catch {}
         }
-        setMsgs([...history, { role: "assistant", content, meta: { ...meta } }]);
+        setMsgs([...history, { role: "assistant", content: reasoning ? `<think>${reasoning}</think>${content}` : content, meta: { ...meta } }]);
       }
       meta.totalMs = performance.now() - t0;
-      setMsgs([...history, { role: "assistant", content, meta }]);
+      setMsgs([...history, { role: "assistant", content: reasoning ? `<think>${reasoning}</think>${content}` : content, meta }]);
     } catch (e) {
       setErr((e as Error).message);
       setMsgs(history);

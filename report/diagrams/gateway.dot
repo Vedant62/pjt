@@ -1,0 +1,8 @@
+digraph G { graph [fontname="Times-Roman", fontsize=13, bgcolor=white, pad=0.2, nodesep=0.45, ranksep=0.55]; node [fontname="Times-Roman", fontsize=12, shape=box, style="rounded,filled", fillcolor="#ffffff", color="#444444", penwidth=1.1]; edge [fontname="Times-Roman", fontsize=10.5, color="#444444", arrowsize=0.7]; rankdir=TB;
+ req [label="POST /v1/chat/completions\nBearer SIWE-JWT or csk_ key", shape=ellipse, fillcolor="#fdf7ef"];
+ auth [label="Resolve wallet\n(JWT / hashed API key)"]; ent [label="entitledSubOf(wallet, PLAN_ID)\n15 s in-memory cache"]; e402 [label="402 Payment Required\n{status, subId, nextChargeAt}", fillcolor="#fbe4e4"];
+ pol [label="Policy: model allowlist · max_tokens ≤ 256\n10 req/min/wallet · live budget (persisted)"]; e4xx [label="400 / 429 / 503", fillcolor="#fbe4e4"];
+ fwd [label="Forward to AIPG with platform key\n(stream_options.include_usage)"]; pipe [label="Pass SSE bytes through unchanged\naccumulate content + reasoning + usage"];
+ row [label="Insert usage row (SQLite)\nrequestHash · responseHash · tokens · TTFT"]; ep [label="Epoch job: StandardMerkleTree\n→ commitRoot on-chain", fillcolor="#f9ead6"];
+ req -> auth -> ent; ent -> e402 [label="not entitled"]; ent -> pol [label="entitled"]; pol -> e4xx [label="violates"]; pol -> fwd [label="ok"]; fwd -> pipe -> row -> ep [style=dashed, label="every EPOCH_SECONDS"];
+}

@@ -1,0 +1,12 @@
+digraph G { graph [fontname="Times-Roman", fontsize=13, bgcolor=white, pad=0.2, nodesep=0.45, ranksep=0.55]; node [fontname="Times-Roman", fontsize=12, shape=box, style="rounded,filled", fillcolor="#ffffff", color="#444444", penwidth=1.1]; edge [fontname="Times-Roman", fontsize=10.5, color="#444444", arrowsize=0.7]; rankdir=LR;
+ start [shape=point, width=0.15]; endn [shape=doublecircle, label="", width=0.15, fillcolor=black];
+ Active [fillcolor="#e8f6ee"]; PastDue [fillcolor="#fdf3dc"]; Lapsed [fillcolor="#fbe4e4"]; Cancelled [fillcolor="#eeeeee"];
+ start -> Active [label="subscribe()\nfirst period paid"];
+ Active -> Active [label="charge OK\nnextChargeAt += period"];
+ Active -> PastDue [label="charge fails\n(balance / allowance)\nwithin grace"];
+ PastDue -> Active [label="charge OK\n(top-up in grace)"];
+ PastDue -> PastDue [label="fails again\nwithin grace"];
+ Active -> Lapsed [label="fails after grace"]; PastDue -> Lapsed [label="fails after grace"];
+ Active -> Cancelled [label="cancel()"]; PastDue -> Cancelled [label="cancel()"];
+ Lapsed -> endn; Cancelled -> endn [label="entitled until\npaid-through"];
+}

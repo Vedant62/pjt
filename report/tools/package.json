@@ -1,0 +1,1 @@
+{"name":"cashew-report-tools","private":true,"type":"module","dependencies":{"docx":"^9.0.2","dotenv":"^16.4.5","playwright-core":"^1.48.2","viem":"^2.21.37"}}

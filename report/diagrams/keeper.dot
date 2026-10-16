@@ -1,0 +1,8 @@
+digraph G { graph [fontname="Times-Roman", fontsize=13, bgcolor=white, pad=0.2, nodesep=0.45, ranksep=0.55]; node [fontname="Times-Roman", fontsize=12, shape=box, style="rounded,filled", fillcolor="#ffffff", color="#444444", penwidth=1.1]; edge [fontname="Times-Roman", fontsize=10.5, color="#444444", arrowsize=0.7]; rankdir=TB;
+ tick [label="Timer: every TICK_SECONDS\n(15 s demo, 6 h production)", shape=ellipse, fillcolor="#fdf7ef"];
+ scan [label="Page dueSubscriptions(cursor, 500)\nuntil nextCursor = 0"]; any [label="Due ids not yet\nfailed this tick?", shape=diamond, style=filled];
+ chunk [label="Split into chunks of BATCH_SIZE (100)"]; sim [label="simulateContract(chargeBatch)"]; send [label="Send tx, wait for receipt"];
+ parse [label="Parse Charged / ChargeFailed / SubscriptionLapsed\nappend JSONL: scheduledAt, executedAt, drift, gas"];
+ again [label="round < maxRounds?\n(catch-up after an outage)", shape=diamond, style=filled]; sleep [label="Sleep until next tick", shape=ellipse, fillcolor="#fdf7ef"];
+ tick -> scan -> any; any -> chunk [label="yes"]; any -> sleep [label="no"]; chunk -> sim -> send -> parse -> again; again -> scan [label="yes"]; again -> sleep [label="no"]; sleep -> tick [style=dashed];
+}

@@ -60,7 +60,7 @@ errors: NotCommitter, ZeroRoot, RootAlreadyCommitted(planId, epoch)
 | D13 | Foundry installed via Homebrew (1.8.5) | The `foundryup` download was blocked by the sandbox network policy. |
 | D14 | matplotlib 3.10.7 (not 3.9) | 3.9 fails on Python 3.14 (infinite recursion in `deepcopy`). |
 | D15 | Gateway API keys can only be minted with a SIWE JWT, not with another `csk_` key | A leaked key then can't mint more keys. |
-| D16 | `responseHash = keccak256(assistant message content)`, `requestHash = keccak256(canonical JSON of the forwarded body, keys sorted)` | The spec says "full response text". For streams we hash the concatenated deltas, so streaming and non-streaming hash the same way. |
+| D16 | `responseHash = keccak256(assistant message content)`, `requestHash = keccak256(canonical JSON of the forwarded body, keys sorted)` | The spec says "full response text". For streams we hash the concatenated deltas, so streaming and non-streaming hash the same way. | **Update:** the hash now covers `reasoning_content + content`, because qwen3 streams its thinking separately. Hashing only the content would hash an empty string for reasoning-only replies.
 | D17 | Usage rows carry `usageSource` (`upstream` / `estimated`) | If AIPG omits the usage block, tokens are estimated (chars/4) and flagged rather than silently invented. The flag is not part of the leaf. |
 | D18 | Dashboard: anvil-only "dev wallets" | Lets the local demo and fallback run without a browser extension. They use only the public anvil keys, only on chain 31337, and are disabled in `testnet:up`. |
 | D19 | `local:up` seeds one cancelled subscription | Gives attack #3 a target immediately. |

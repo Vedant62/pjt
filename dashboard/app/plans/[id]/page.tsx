@@ -59,7 +59,9 @@ export default function PlanPage() {
 
   const meta = p ? parseMetadata(p.metadataURI) : {};
   const price = p ? BigInt(p.price) : 0n;
-  const cycles = price > 0n && allowance !== undefined ? allowance / price : undefined;
+  const UNLIMITED = 2n ** 255n; // e.g. approve(maxUint256) from scripts
+  const unlimited = allowance !== undefined && allowance >= UNLIMITED;
+  const cycles = price > 0n && allowance !== undefined && !unlimited ? allowance / price : undefined;
   const live = s && (s.status === 1 || s.status === 2);
 
   async function subscribe() {
@@ -127,7 +129,7 @@ export default function PlanPage() {
                 <>
                   <div className="mt-3">
                     <Row k="mUSDC balance">{fmtUsdc(balance)}</Row>
-                    <Row k="Vault allowance">{fmtUsdc(allowance)} {cycles !== undefined && <span className="text-stone-500">({cycles.toString()} cycles)</span>}</Row>
+                    <Row k="Vault allowance">{unlimited ? "unlimited" : fmtUsdc(allowance)} {cycles !== undefined && <span className="text-stone-500">({cycles.toString()} cycles)</span>}</Row>
                   </div>
                   <div className="mt-4 flex flex-wrap gap-2">
                     <button className="btn-secondary" disabled={tx.busy} onClick={() => tx.send("Mint 100 mUSDC", { address: p.token, abi: mockUSDCAbi, functionName: "mint", args: [address, parseUnits("100", 6)] })}>
@@ -169,7 +171,7 @@ export default function PlanPage() {
                       </Row>
                     )}
                     <Row k="Charges">{s.chargeCount.toString()}</Row>
-                    <Row k="Allowance cycles left">{cycles?.toString() ?? "—"}</Row>
+                    <Row k="Allowance cycles left">{unlimited ? "unlimited" : cycles?.toString() ?? "—"}</Row>
                   </div>
                   <div className="mt-4 flex flex-wrap gap-2">
                     {live && (

@@ -1,0 +1,7 @@
+digraph G { graph [fontname="Times-Roman", fontsize=13, bgcolor=white, pad=0.2, nodesep=0.45, ranksep=0.55]; node [fontname="Times-Roman", fontsize=12, shape=box, style="rounded,filled", fillcolor="#ffffff", color="#444444", penwidth=1.1]; edge [fontname="Times-Roman", fontsize=10.5, color="#444444", arrowsize=0.7]; rankdir=TB;
+ rows [label="Usage rows of epoch e\n(epoch, wallet, subId, model,\nprompt/completion tokens,\nrequestHash, responseHash, ts)", shape=note];
+ leaf [label="leaf = keccak256(keccak256(\nabi.encode(row)))"]; tree [label="StandardMerkleTree\n(sorted-pair hashing)"]; root [label="root", shape=ellipse, fillcolor="#f9ead6"];
+ chain [label="UsageRootRegistry.commitRoot(\nplanId, e, root, rows, tokens, uri)", fillcolor="#f9ead6"];
+ verify [label="Anyone: hashRow(row) +\nverifyRow(planId, e, proof, leaf)\n→ true / false"];
+ rows -> leaf -> tree -> root -> chain; chain -> verify [label="proof from\nGET /epochs/e/proof/row"];
+}

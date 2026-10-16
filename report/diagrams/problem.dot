@@ -1,0 +1,6 @@
+digraph G { graph [fontname="Times-Roman", fontsize=13, bgcolor=white, pad=0.2, nodesep=0.45, ranksep=0.55]; node [fontname="Times-Roman", fontsize=12, shape=box, style="rounded,filled", fillcolor="#ffffff", color="#444444", penwidth=1.1]; edge [fontname="Times-Roman", fontsize=10.5, color="#444444", arrowsize=0.7]; rankdir=TB;
+ gpu [label="Open-weight model owners\nidle GPUs, no billing relationship", shape=ellipse, fillcolor="#fdf7ef"];
+ grid [label="AI Power Grid\nrouting + metering"]; dev [label="Developers and agents\nhold crypto, no card on file", shape=ellipse, fillcolor="#fdf7ef"];
+ cashew [label="Cashew\n20 mUSDC per cycle, on-chain", fillcolor="#f9ead6"];
+ gpu -> grid [label="serve inference"]; grid -> dev [label="completions"]; dev -> cashew [label="subscribe once"]; cashew -> grid [label="entitlement + revenue"]; grid -> gpu [label="earnings", style=dashed];
+}
