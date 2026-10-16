@@ -38,15 +38,17 @@ pnpm test:gateway                         # gateway e2e against a running local 
 pnpm typecheck
 ```
 
-## Testnet (Base Sepolia)
+## Testnet (Ethereum Sepolia by default; Base Sepolia supported)
 
-1. `cp contracts/.env.example contracts/.env` and set `PRIVATE_KEY` (deployer), `ETHERSCAN_API_KEY` (Etherscan v2), `GATEWAY_ADDRESS` (the gateway's committer wallet) and `SUBSCRIBER_ADDRESSES`. Fund the deployer, keeper and gateway with Base Sepolia ETH.
-2. Deploy, seed, verify on BaseScan, and sync addresses:
+The default testnet is **Ethereum Sepolia (11155111)**. Base Sepolia (84532) still works: pass `--chain 84532` or set `TESTNET_CHAIN=84532`.
+
+1. `cp contracts/.env.example contracts/.env` and set `PRIVATE_KEY` (deployer), `ETHERSCAN_API_KEY` (Etherscan v2), `GATEWAY_ADDRESS` (the gateway's committer wallet) and `SUBSCRIBER_ADDRESSES`. Fund the deployer, keeper, gateway and subscriber wallets with testnet ETH.
+2. Deploy, seed, verify on Etherscan, and sync addresses:
    ```bash
    pnpm deploy:testnet
    ```
-3. `cp keeper/.env.example keeper/.env` and `cp gateway/.env.example gateway/.env`. Set `RPC_URL=https://sepolia.base.org` and `CHAIN_ID=84532`, plus the keeper/gateway keys and a long random `JWT_SECRET`. Leave `AIPG_MODE=mock` until you are ready to spend credits.
-4. Run keeper + gateway + dashboard against Base Sepolia:
+3. `cp keeper/.env.example keeper/.env` and `cp gateway/.env.example gateway/.env`. Set `RPC_URL=https://ethereum-sepolia-rpc.publicnode.com`, plus the keeper/gateway keys and a long random `JWT_SECRET`. Leave `AIPG_MODE=mock` until you are ready to spend credits. (`testnet:up` forces `CHAIN_ID`.)
+4. Run keeper + gateway + dashboard against the testnet:
    ```bash
    pnpm testnet:up
    ```

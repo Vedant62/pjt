@@ -31,14 +31,15 @@
 - Schedule sim: 500 subscribers, 12 × 30-day periods, ticks 60 s / 600 s / 1 h / 6 h, each on a fresh anvil (seeded jitter so due times don't align with the tick grid). The real `Keeper` class is used.
 - Outage: the real keeper process gets SIGTERM (graceful, exit 0), 3 periods pass, then it restarts; all missed charges are recovered, 0 lost, anchored schedule intact.
 
-## Phase 6 — Testnet ⏳ (needs your keys)
-Ready to run, not yet run (I have no funded Base Sepolia keys or Etherscan key):
-1. Fill `contracts/.env`, then `pnpm deploy:testnet` (deploy + seed + verify + sync).
-2. Fill `keeper/.env` and `gateway/.env` (CHAIN_ID=84532), then `pnpm testnet:up`.
-3. `cd sim && pnpm lifecycle` (needs `LIFECYCLE_SUBSCRIBER_KEY` and `LIFECYCLE_KEEPER_KEY` in `sim/.env`) and `pnpm grid-snapshot`.
+## Phase 6 — Testnet ⏳ (target switched to Ethereum Sepolia)
+Deviation: the testnet is **Ethereum Sepolia (11155111)** because no Base Sepolia ETH could be obtained. Base Sepolia stays supported (`--chain 84532`); see REPORT_NOTES D20.
+`contracts/.env`, `keeper/.env`, `gateway/.env` and `sim/.env` are filled (gitignored). The deployer is funded; the keeper, gateway and subscriber wallets still need funding.
+1. `pnpm deploy:testnet` (deploy + seed + Etherscan verify + sync).
+2. `pnpm testnet:up`.
+3. Stop the keeper, then `cd sim && pnpm lifecycle`. `grid_snapshot.json` is done: it shows no qwen3 worker online at run time.
 4. Paste the addresses into docs/REPORT_NOTES.md §7.
 
-## Phase 7 — Live AIPG ⏳ (needs AIPG key + credits)
+## Phase 7 — Live AIPG ⏳ (key stored; blocked until a qwen3 worker is online)
 `AIPG_MODE=live` in gateway/.env → create a `csk_` key on /chat for an entitled wallet → `cd sim && pnpm bench` (24 requests by default, asks first) → 3–5 real chats → wait for 2 epochs → `pnpm epochs` → `pnpm results:summary`.
 
 ## Phase 8 — Docs (drafted)

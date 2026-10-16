@@ -68,10 +68,15 @@ try {
 run("anvil", "anvil", ["--block-time", "1", "--silent"]);
 await waitForRpc();
 
-const forgeEnv = { PRIVATE_KEY: "", GATEWAY_ADDRESS: "", SUBSCRIBER_ADDRESSES: "" }; // force anvil defaults
-for (const k of Object.keys(forgeEnv)) delete process.env[k];
-step("deploy", "forge", ["script", "script/Deploy.s.sol", "--rpc-url", RPC, "--broadcast", "-q"], join(root, "contracts"));
-step("seed", "forge", ["script", "script/Seed.s.sol", "--rpc-url", RPC, "--broadcast", "-q"], join(root, "contracts"));
+// Forge auto-loads contracts/.env (testnet keys); process env wins over it, so pin the public anvil defaults explicitly.
+const forgeEnv = {
+  PRIVATE_KEY: "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80",
+  GATEWAY_ADDRESS: "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+  SUBSCRIBER_ADDRESSES: "0x90F79bf6EB2c4f870365E785982E1f101E93b906,0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65,0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc",
+  PAYEE: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+};
+step("deploy", "forge", ["script", "script/Deploy.s.sol", "--rpc-url", RPC, "--broadcast", "-q"], join(root, "contracts"), forgeEnv);
+step("seed", "forge", ["script", "script/Seed.s.sol", "--rpc-url", RPC, "--broadcast", "-q"], join(root, "contracts"), forgeEnv);
 step("sync ABIs", "node", ["packages/shared/scripts/sync.mjs"]);
 
 // Give the attack panel's "charge a cancelled subscription" a target: subscriber #2 subscribes, then cancels.

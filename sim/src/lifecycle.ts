@@ -1,18 +1,25 @@
 /**
- * results/lifecycle_testnet.json — scripted lifecycle on Base Sepolia (the deployed demo plan, 180 s period / 60 s grace):
+ * results/lifecycle_testnet.json — scripted lifecycle on the public testnet in TESTNET_CHAIN (default 11155111 Ethereum
+ * Sepolia; 84532 Base Sepolia also works) against the deployed demo plan (180 s period / 60 s grace):
  * subscribe (permit) → 3 keeper charges → drain balance → ChargeFailed → PastDue → top up → recovered → cancel →
  * entitled until paid-through → not entitled. Each step records tx hash, block timestamp, gas and on-chain status.
- * Needs LIFECYCLE_SUBSCRIBER_KEY and LIFECYCLE_KEEPER_KEY (both with a little Base Sepolia ETH). Takes ~15 minutes.
+ * Needs LIFECYCLE_SUBSCRIBER_KEY and LIFECYCLE_KEEPER_KEY (both with a little testnet ETH). Takes ~15 minutes.
+ * Stop the keeper service first (or it may charge before this script does; the script then fails with NotDue).
  */
 import "dotenv/config";
 import { createPublicClient, createWalletClient, http, parseEventLogs, parseSignature, type Hex } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
-import { chainFor, getDeployment, mockUSDCAbi, subscriptionVaultAbi, SubStatus } from "@cashew/shared";
+import { chainFor, getDeployment, mockUSDCAbi, subscriptionVaultAbi, SubStatus, EXPLORERS, DEFAULT_TESTNET } from "@cashew/shared";
 import { meta, writeResult } from "./lib/common";
 
-const RPC = process.env.BASE_SEPOLIA_RPC_URL ?? "https://sepolia.base.org";
-const chain = chainFor(84532, RPC);
-const dep = getDeployment(84532);
+const CHAIN_ID = Number(process.env.TESTNET_CHAIN ?? DEFAULT_TESTNET);
+const RPC =
+  CHAIN_ID === 84532
+    ? process.env.BASE_SEPOLIA_RPC_URL ?? "https://sepolia.base.org"
+    : process.env.SEPOLIA_RPC_URL ?? "https://ethereum-sepolia-rpc.publicnode.com";
+const EXPLORER = EXPLORERS[CHAIN_ID];
+const chain = chainFor(CHAIN_ID, RPC);
+const dep = getDeployment(CHAIN_ID);
 const planId = BigInt(dep.demoPlanId ?? 1);
 const sub = privateKeyToAccount(process.env.LIFECYCLE_SUBSCRIBER_KEY as Hex);
 const keeper = privateKeyToAccount(process.env.LIFECYCLE_KEEPER_KEY as Hex);
@@ -44,7 +51,7 @@ async function tx(step: string, w: typeof ws, req: any) {
   const block = await pub.getBlock({ blockNumber: rc.blockNumber });
   const after = await state();
   const events = parseEventLogs({ abi: subscriptionVaultAbi, logs: rc.logs }).map((e) => e.eventName);
-  const row = { step, txHash: hash, events, blockNumber: Number(rc.blockNumber), blockTimestamp: Number(block.timestamp), gasUsed: Number(rc.gasUsed), txStatus: rc.status, ...after };
+  const row = { step, txHash: hash, explorerUrl: EXPLORER ? `${EXPLORER}/tx/${hash}` : null, events, blockNumber: Number(rc.blockNumber), blockTimestamp: Number(block.timestamp), gasUsed: Number(rc.gasUsed), txStatus: rc.status, ...after };
   steps.push(row);
   console.log(`${step}: ${after.status} entitled=${after.entitled} charges=${after.chargeCount} gas=${rc.gasUsed} ${hash}`);
   return row;
@@ -77,7 +84,7 @@ const value = price * 12n;
 const deadline = BigInt(Math.floor(Date.now() / 1000) + 3600);
 const nonce = await pub.readContract({ ...token, functionName: "nonces", args: [sub.address] });
 const sig = await ws.signTypedData({
-  domain: { name: "Mock USD Coin", version: "1", chainId: 84532, verifyingContract: dep.MockUSDC },
+  domain: { name: "Mock USD Coin", version: "1", chainId: CHAIN_ID, verifyingContract: dep.MockUSDC },
   types: { Permit: [{ name: "owner", type: "address" }, { name: "spender", type: "address" }, { name: "value", type: "uint256" }, { name: "nonce", type: "uint256" }, { name: "deadline", type: "uint256" }] },
   primaryType: "Permit",
   message: { owner: sub.address, spender: dep.SubscriptionVault, value, nonce, deadline },
@@ -119,6 +126,6 @@ await waitChain(paidThrough + 1);
 await observe("after paid-through");
 
 writeResult("lifecycle_testnet.json", {
-  ...meta("sim/src/lifecycle.ts", { chainId: 84532, rpc: RPC, explorer: "https://sepolia.basescan.org", subscriber: sub.address, keeper: keeper.address, planId: planId.toString(), subId: subId.toString(), contracts: dep }),
+  ...meta("sim/src/lifecycle.ts", { chainId: CHAIN_ID, rpc: RPC, explorer: EXPLORER, subscriber: sub.address, keeper: keeper.address, planId: planId.toString(), subId: subId.toString(), contracts: dep }),
   steps,
 });

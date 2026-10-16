@@ -19,11 +19,15 @@ export interface Deployment {
 
 export const addresses = addressesJson as unknown as Record<string, Deployment>;
 
-export const CHAIN_IDS = { anvil: 31337, baseSepolia: 84532 } as const;
+export const CHAIN_IDS = { anvil: 31337, baseSepolia: 84532, sepolia: 11155111 } as const;
+
+/** Default public testnet (Ethereum Sepolia; Base Sepolia remains supported). */
+export const DEFAULT_TESTNET = CHAIN_IDS.sepolia;
 
 export const EXPLORERS: Record<number, string | null> = {
   31337: null,
   84532: "https://sepolia.basescan.org",
+  11155111: "https://sepolia.etherscan.io",
 };
 
 export function getDeployment(chainId: number): Deployment {
@@ -74,11 +78,11 @@ export const ANVIL_ACCOUNTS = {
 } as const;
 
 import { defineChain, type Chain } from "viem";
-import { baseSepolia, foundry } from "viem/chains";
+import { baseSepolia, foundry, sepolia } from "viem/chains";
 
 /** viem chain object for a chainId, optionally overriding the RPC URL. */
 export function chainFor(chainId: number, rpcUrl?: string): Chain {
-  const base = chainId === 84532 ? baseSepolia : chainId === 31337 ? foundry : null;
+  const base = chainId === 84532 ? baseSepolia : chainId === 11155111 ? sepolia : chainId === 31337 ? foundry : null;
   if (!base) throw new Error(`Unsupported chainId ${chainId}`);
   if (!rpcUrl) return base;
   return defineChain({ ...base, rpcUrls: { default: { http: [rpcUrl] } } });

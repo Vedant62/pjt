@@ -75,12 +75,12 @@ if (o) {
 
 // 7. Testnet lifecycle
 const lc = r("lifecycle_testnet.json");
-md += `## 7. Base Sepolia lifecycle\n\n`;
+md += `## 7. Testnet lifecycle${lc ? ` (chain ${lc.chainId})` : ""}\n\n`;
 if (lc) {
   md += `| Step | Status after | Entitled | Charges | Gas | Tx |\n|---|---|---|---:|---:|---|\n`;
-  for (const s of lc.steps) md += `| ${s.step} | ${s.status} | ${s.entitled} | ${s.chargeCount} | ${fmt(s.gasUsed)} | ${s.txHash ? `[${s.txHash.slice(0, 10)}…](https://sepolia.basescan.org/tx/${s.txHash})` : "—"} |\n`;
+  for (const s of lc.steps) md += `| ${s.step} | ${s.status} | ${s.entitled} | ${s.chargeCount} | ${fmt(s.gasUsed)} | ${s.txHash ? (lc.explorer ? `[${s.txHash.slice(0, 10)}…](${lc.explorer}/tx/${s.txHash})` : `\`${s.txHash.slice(0, 10)}…\``) : "—"} |\n`;
   md += `\n${src(lc)}\n\n`;
-} else md += missing("lifecycle_testnet.json", "Not run yet: needs the Base Sepolia deployment (`pnpm deploy:testnet`) and two funded testnet keys (`pnpm results:testnet`).");
+} else md += missing("lifecycle_testnet.json", "Not run yet: needs the testnet deployment (`pnpm deploy:testnet`, Ethereum Sepolia by default) and two funded testnet keys (`cd sim && pnpm lifecycle`).");
 
 // 8. Grid snapshot
 const gs = r("grid_snapshot.json");
@@ -106,5 +106,6 @@ if (ep) {
   md += `\n\n${src(ep)}\n\n`;
 } else md += missing("epochs.json", "Not run yet: produced from the testnet gateway after epochs commit (`pnpm results:testnet`).");
 
-md += `## Assumptions and caveats\n\n- Local experiments run on anvil (chainId 31337), with time travel where stated. Gas is EVM gas, which is identical on Base. Fees are not.\n- The Foundry gas report measures execution gas only. Receipt gas (sections 3, 5) includes intrinsic and calldata gas.\n- Cost-model rows marked "assumed" depend on ETH/USD and gas-price assumptions stated in section 4.\n- The gateway is a trusted metering party: an epoch root proves only what the gateway recorded.\n`;
+md += `## Assumptions and caveats\n\n- Local experiments run on anvil (chainId 31337), with time travel where stated. Gas is EVM gas, which is identical on Base and Ethereum. Fees are not.
+- The public testnet deployment is Ethereum Sepolia (11155111). The cost model (section 4) still uses the measured Base Sepolia gas price, so its dollar figures describe Base.\n- The Foundry gas report measures execution gas only. Receipt gas (sections 3, 5) includes intrinsic and calldata gas.\n- Cost-model rows marked "assumed" depend on ETH/USD and gas-price assumptions stated in section 4.\n- The gateway is a trusted metering party: an epoch root proves only what the gateway recorded.\n`;
 writeResult("RESULTS.md", md);

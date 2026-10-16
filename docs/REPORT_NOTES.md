@@ -64,6 +64,7 @@ errors: NotCommitter, ZeroRoot, RootAlreadyCommitted(planId, epoch)
 | D17 | Usage rows carry `usageSource` (`upstream` / `estimated`) | If AIPG omits the usage block, tokens are estimated (chars/4) and flagged rather than silently invented. The flag is not part of the leaf. |
 | D18 | Dashboard: anvil-only "dev wallets" | Lets the local demo and fallback run without a browser extension. They use only the public anvil keys, only on chain 31337, and are disabled in `testnet:up`. |
 | D19 | `local:up` seeds one cancelled subscription | Gives attack #3 a target immediately. |
+| D20 | Testnet is Ethereum Sepolia (11155111) instead of Base Sepolia | No Base Sepolia faucet was usable without mainnet ETH. The contracts are chain-agnostic, and Base Sepolia (84532) is still supported (`--chain 84532`). `cost_model.json` still uses the measured Base Sepolia gas price, so the cost analysis applies to Base. |
 
 ## 3. Design decisions
 
@@ -121,9 +122,9 @@ errors: NotCommitter, ZeroRoot, RootAlreadyCommitted(planId, epoch)
 
 ## 7. Deployed addresses and verification
 
-_Base Sepolia deployment pending (phase 6). After `pnpm deploy:testnet`, copy the addresses from `packages/shared/src/addresses.json` (key `84532`) here with BaseScan links:_
+_Ethereum Sepolia deployment pending (phase 6). After `pnpm deploy:testnet`, copy the addresses from `packages/shared/src/addresses.json` (key `11155111`) here with Etherscan links (https://sepolia.etherscan.io/address/…):_
 
-| Contract | Address | BaseScan |
+| Contract | Address | Etherscan |
 |---|---|---|
 | MockUSDC | — | — |
 | PlanRegistry | — | — |

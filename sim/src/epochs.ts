@@ -1,13 +1,18 @@
 /** results/epochs.json — committed epochs as reported by the running gateway, plus one inclusion proof verified on-chain. */
 import "dotenv/config";
 import { createPublicClient, http, type Hex } from "viem";
-import { chainFor, getDeployment, usageRootRegistryAbi } from "@cashew/shared";
+import { chainFor, getDeployment, usageRootRegistryAbi, EXPLORERS } from "@cashew/shared";
 import { meta, writeResult } from "./lib/common";
 
 const GW = (process.env.GATEWAY_URL ?? "http://localhost:8787").replace(/\/$/, "");
 const health = await (await fetch(`${GW}/health`)).json();
 const chainId = Number(health.chainId);
-const rpc = chainId === 84532 ? process.env.BASE_SEPOLIA_RPC_URL ?? "https://sepolia.base.org" : process.env.RPC_URL ?? "http://127.0.0.1:8545";
+const rpc =
+  chainId === 84532
+    ? process.env.BASE_SEPOLIA_RPC_URL ?? "https://sepolia.base.org"
+    : chainId === 11155111
+      ? process.env.SEPOLIA_RPC_URL ?? "https://ethereum-sepolia-rpc.publicnode.com"
+      : process.env.RPC_URL ?? "http://127.0.0.1:8545";
 const pub = createPublicClient({ chain: chainFor(chainId, rpc), transport: http(rpc) });
 const dep = getDeployment(chainId);
 const list = await (await fetch(`${GW}/epochs`)).json();
@@ -26,7 +31,7 @@ if (latest) {
 }
 
 writeResult("epochs.json", {
-  ...meta("sim/src/epochs.ts", { gateway: GW, chainId, mode: health.mode, epochSeconds: list.epochSeconds, registry: dep.UsageRootRegistry }),
+  ...meta("sim/src/epochs.ts", { gateway: GW, chainId, explorer: EXPLORERS[chainId] ?? null, mode: health.mode, epochSeconds: list.epochSeconds, registry: dep.UsageRootRegistry }),
   epochs: list.epochs,
   totals: { epochs: list.epochs.length, rows: list.epochs.reduce((n: number, e: any) => n + e.rowCount, 0), tokens: list.epochs.reduce((n: number, e: any) => n + e.totalTokens, 0) },
   verifiedInclusionProof: verified,
