@@ -35,7 +35,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env, overrides: Part
     gatewayKey: (env.GATEWAY_PRIVATE_KEY ??
       "0x5de4111afa1a4b94908f83103eb1f1706367c2e68ca870fc3fb9a804cdab365a") as Hex,
     jwtSecret: env.JWT_SECRET ?? "dev-only-insecure-secret",
-    siweDomain: env.SIWE_DOMAIN ?? "localhost:3000",
+    siweDomain: env.SIWE_DOMAIN ?? "localhost:3000,127.0.0.1:3000",
     aipgMode: mode,
     aipgBaseUrl: (env.AIPG_BASE_URL ?? "https://api.aipowergrid.io").replace(/\/$/, ""),
     aipgApiKey: env.AIPG_API_KEY ?? "",

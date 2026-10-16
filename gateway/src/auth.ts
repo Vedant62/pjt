@@ -33,12 +33,13 @@ export function makeAuth(cfg: GatewayConfig, db: DB, ctx: ChainCtx) {
     if (!parsed.address || !parsed.nonce) throw new Error("malformed SIWE message");
     const exp = nonces.get(parsed.nonce);
     if (!exp || exp < Date.now()) throw new Error("unknown or expired nonce");
-    if (parsed.domain !== cfg.siweDomain) throw new Error(`domain mismatch: expected ${cfg.siweDomain}`);
+    const domains = cfg.siweDomain.split(",").map((d) => d.trim());
+    if (!parsed.domain || !domains.includes(parsed.domain)) throw new Error(`domain mismatch: expected one of ${domains.join(", ")}`);
     if (parsed.chainId !== cfg.chainId) throw new Error(`chainId mismatch: expected ${cfg.chainId}`);
     const ok = await ctx.publicClient.verifySiweMessage({
       message,
       signature,
-      domain: cfg.siweDomain,
+      domain: parsed.domain,
       nonce: parsed.nonce,
     });
     if (!ok) throw new Error("invalid SIWE signature");

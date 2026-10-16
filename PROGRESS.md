@@ -17,3 +17,10 @@
 - `pnpm test:gateway`: 10 end-to-end tests against anvil (SIWE, 402, permit subscribe, stream/non-stream, API keys, epoch commit + on-chain `verifyRow`, JS leaf == Solidity `hashRow`, cancel → paid-through → 402).
 - `pnpm local:up` verified: fresh anvil (1 s blocks) → deploy → seed → sync → keeper + gateway; a subscription made with `cast` was charged by the keeper automatically.
 - Deviations: SIWE uses viem's built-in EIP-4361 implementation (`viem/siwe`) instead of the `siwe` package (avoids an ethers peer dependency); Node 22 is used locally (spec says 20; code targets ≥ 20).
+
+## Phase 4 — Dashboard ✅
+- Next.js 14 App Router + wagmi v2 + RainbowKit + Tailwind. Pages: `/`, `/provider`, `/plans/[id]`, `/chat`, `/activity`, `/attacks`, `/epochs`.
+- Anvil-only "dev wallets" (public anvil test keys, wrapped as an EIP-1193 provider) so the local demo runs without a browser extension; they only connect after an explicit click.
+- Walked in a browser against `pnpm local:up` (mock mode): permit-subscribe (1 signature + 1 tx) → SIWE sign-in → streamed chat with tokens/TTFT → keeper charged automatically (drift 4 s, shown in /activity) → epoch root committed → /epochs proof verified on-chain (✓, tamper → ✗) → attack panel: all five reverts decoded; "send for real" broadcasts the reverting tx.
+- `local:up` seeds one cancelled subscription so attack #3 has a target; `DASHBOARD_PORT` overrides :3000.
+- Fixes found while walking: `scrollIntoView` returns a Promise in current Chromium (effect cleanup crash); wagmi's `writeContract` pre-simulates and its receipt wait throws on reverts (bypassed only for the deliberate attack broadcast); wallet SDKs touch `indexedDB` during SSR, so the wallet tree renders client-only.

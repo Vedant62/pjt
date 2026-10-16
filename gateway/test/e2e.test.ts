@@ -73,9 +73,9 @@ test("SIWE sign-in issues a JWT", async () => {
   const message = createSiweMessage({
     address: account.address,
     chainId: 31337,
-    domain: cfg.siweDomain,
+    domain: "localhost:3000",
     nonce,
-    uri: `http://${cfg.siweDomain}`,
+    uri: "http://localhost:3000",
     version: "1",
     statement: "Sign in to the Cashew Gateway",
   });

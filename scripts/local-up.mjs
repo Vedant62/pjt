@@ -2,12 +2,13 @@
 // `pnpm local:up` — fresh anvil → deploy + seed → sync ABIs → keeper + gateway (mock) + dashboard.
 // Ctrl-C stops everything. Pass --no-dashboard to skip the Next.js app.
 import { spawn, spawnSync } from "node:child_process";
-import { existsSync, rmSync, mkdirSync, renameSync } from "node:fs";
+import { existsSync, rmSync, mkdirSync, renameSync, readFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const RPC = "http://127.0.0.1:8545";
+const DASH_PORT = process.env.DASHBOARD_PORT ?? "3000";
 const args = new Set(process.argv.slice(2));
 const children = [];
 const colors = { anvil: 90, keeper: 33, gateway: 36, dashboard: 35 };
@@ -73,6 +74,16 @@ step("deploy", "forge", ["script", "script/Deploy.s.sol", "--rpc-url", RPC, "--b
 step("seed", "forge", ["script", "script/Seed.s.sol", "--rpc-url", RPC, "--broadcast", "-q"], join(root, "contracts"));
 step("sync ABIs", "node", ["packages/shared/scripts/sync.mjs"]);
 
+// Give the attack panel's "charge a cancelled subscription" a target: subscriber #2 subscribes, then cancels.
+{
+  const d = JSON.parse(readFileSync(join(root, "packages/shared/src/addresses.json"), "utf8"))["31337"];
+  const k2 = "0x47e179ec197488593b187f80a00eb0da91f1b9d0b13f8733639f19c30a34926a";
+  const cast = (...a) => step(`cast ${a[1]}`, "cast", ["send", "-q", "--rpc-url", RPC, "--private-key", k2, ...a]);
+  cast(d.MockUSDC, "approve(address,uint256)", d.SubscriptionVault, "20000000");
+  cast(d.SubscriptionVault, "subscribe(uint256)", String(d.demoPlanId));
+  cast(d.SubscriptionVault, "cancel(uint256)", "1");
+}
+
 // Fresh chain → fresh gateway DB / epoch files / keeper log.
 const gwData = join(root, "gateway", "data", "31337");
 const gwEpochs = join(root, "gateway", "epochs", "31337");
@@ -97,9 +108,10 @@ run("gateway", "pnpm", ["exec", "tsx", "src/index.ts"], {
     DATA_DIR: gwData,
     EPOCH_DIR: gwEpochs,
     EPOCH_SECONDS: process.env.EPOCH_SECONDS ?? "300",
+    SIWE_DOMAIN: `localhost:${DASH_PORT},127.0.0.1:${DASH_PORT}`,
   },
 });
 if (!args.has("--no-dashboard") && existsSync(join(root, "dashboard", "package.json"))) {
-  run("dashboard", "pnpm", ["exec", "next", "dev", "-p", "3000"], { cwd: join(root, "dashboard"), env: { NEXT_PUBLIC_DEFAULT_CHAIN: "31337" } });
+  run("dashboard", "pnpm", ["exec", "next", "dev", "-p", DASH_PORT], { cwd: join(root, "dashboard"), env: { NEXT_PUBLIC_DEFAULT_CHAIN: "31337" } });
 }
-console.log("\n\x1b[1mCashew local stack\x1b[0m  anvil :8545 · gateway :8787 · keeper health :8788 · dashboard :3000\n");
+console.log(`\n\x1b[1mCashew local stack\x1b[0m  anvil :8545 · gateway :8787 · keeper health :8788 · dashboard http://localhost:${DASH_PORT}\n`);
