@@ -2,5 +2,5 @@ packages:
   - packages/*
   - keeper
   - gateway
-  - dashboard
   - sim
+  - dashboard

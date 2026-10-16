@@ -4,8 +4,25 @@
   "version": "0.1.0",
   "description": "Decentralized recurring payments on EVM chains, demonstrated on AI Power Grid access",
   "packageManager": "pnpm@9.9.0",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
-    "test:contracts": "cd contracts && forge test -vvv"
+    "test:contracts": "cd contracts && forge test -vvv",
+    "test:gateway": "pnpm --filter @cashew/gateway test",
+    "sync:abis": "node packages/shared/scripts/sync.mjs",
+    "local:up": "node scripts/local-up.mjs",
+    "typecheck": "pnpm -r --filter './packages/*' --filter ./keeper --filter ./gateway --filter ./sim exec tsc --noEmit -p ."
+  },
+  "devDependencies": {
+    "concurrently": "9.0.1",
+    "typescript": "5.6.3",
+    "tsx": "4.19.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "better-sqlite3",
+      "esbuild"
+    ]
   }
 }
