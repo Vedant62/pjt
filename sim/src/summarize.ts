@@ -94,6 +94,9 @@ md += `## 9. Gateway latency (live AIPG)\n\n`;
 if (gb) {
   md += `${gb.requestsSent} live requests (${gb.pairs} pairs, ${gb.failures} failed), \`${gb.model}\`, max_tokens ${gb.maxTokens}.\n\n| Metric | Direct p50 | Direct p95 | Gateway p50 | Gateway p95 |\n|---|---:|---:|---:|---:|\n`;
   md += `| TTFT (ms) | ${fmt(gb.ttftMs.direct.p50)} | ${fmt(gb.ttftMs.direct.p95)} | ${fmt(gb.ttftMs.gateway.p50)} | ${fmt(gb.ttftMs.gateway.p95)} |\n| Total (ms) | ${fmt(gb.totalMs.direct.p50)} | ${fmt(gb.totalMs.direct.p95)} | ${fmt(gb.totalMs.gateway.p50)} | ${fmt(gb.totalMs.gateway.p95)} |\n\n`;
+  const r1 = r("gateway_bench_run1.json");
+  if (r1)
+    md += `An earlier run (\`gateway_bench_run1.json\`, ${r1.requestsSent} requests) measured total latency only: direct p50 ${fmt(r1.totalMs.direct.p50)} ms, gateway p50 ${fmt(r1.totalMs.gateway.p50)} ms (n=${r1.totalMs.gateway.n} each). Its TTFT is **null**, because the bench then only counted \`delta.content\`, and qwen3 spent all 64 tokens on reasoning. The run above counts the first token of any kind. Bench requests across both runs: ${gb.totalBenchRequests ?? "null"} (limit 30). AIPG did not return an \`X-Grid-Job-ID\` header, so \`gridJobId\` is null on every row.\n\n`;
   md += `Gateway overhead (paired, gateway − direct): TTFT p50 ${fmt(gb.gatewayOverheadMs.ttft.p50)} ms, p95 ${fmt(gb.gatewayOverheadMs.ttft.p95)} ms. Entitlement check: uncached p50 ${fmt(gb.entitlementCheckMs.uncached.p50, 2)} ms (n=${gb.entitlementCheckMs.uncached.n}), cached p50 ${fmt(gb.entitlementCheckMs.cached.p50, 3)} ms (n=${gb.entitlementCheckMs.cached.n}).\n${fig("fig_ttft.png")}\n${src(gb)}\n\n`;
 } else md += missing("gateway_bench.json", "Not run yet: needs AIPG_MODE=live, an AIPG API key and an entitled gateway key (`pnpm results:testnet`, ≤ 30 live requests).");
 

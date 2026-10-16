@@ -1,0 +1,162 @@
+{
+  "script": "sim/src/bench.ts",
+  "generatedAt": "2026-10-16T07:16:11.051Z",
+  "git": {
+    "commit": "27c6b56",
+    "dirty": true
+  },
+  "model": "qwen3:8b",
+  "maxTokens": 64,
+  "pairs": 3,
+  "requestsSent": 6,
+  "priorBenchRequests": 24,
+  "totalBenchRequests": 30,
+  "aipg": "https://api.aipowergrid.io",
+  "gateway": "http://localhost:8787",
+  "note": "Network-dominated: grid inference latency varies with worker load, so overhead is reported as paired differences (gateway − direct, same iteration). Failed requests are kept in samples with ok=false.",
+  "ttftMs": {
+    "direct": {
+      "n": 3,
+      "p50": 4341.339,
+      "p95": 5344.812600300001,
+      "min": 4160.516416999999,
+      "max": 5456.309667
+    },
+    "gateway": {
+      "n": 3,
+      "p50": 4415.121042,
+      "p95": 4635.0827664,
+      "min": 3343.0159999999996,
+      "max": 4659.522958
+    }
+  },
+  "totalMs": {
+    "direct": {
+      "n": 3,
+      "p50": 5829.100416999998,
+      "p95": 6017.661254799999,
+      "min": 5135.171249999999,
+      "max": 6038.612459
+    },
+    "gateway": {
+      "n": 3,
+      "p50": 5005.927624999999,
+      "p95": 5068.253487200001,
+      "min": 4060.647000000001,
+      "max": 5075.178583000001
+    }
+  },
+  "gatewayOverheadMs": {
+    "ttft": {
+      "n": 3,
+      "p50": -817.5004169999993,
+      "p95": 204.61552049999966,
+      "min": -1041.1886250000007,
+      "max": 318.1839579999996
+    },
+    "total": {
+      "n": 3,
+      "p50": -1032.6848340000006,
+      "p95": -157.26188369999886,
+      "min": -1768.453416999997,
+      "max": -59.99266699999862
+    }
+  },
+  "entitlementCheckMs": {
+    "uncached": {
+      "n": 2,
+      "p50": 600.1600000000001,
+      "p95": 722.731,
+      "min": 463.97,
+      "max": 736.35
+    },
+    "cached": {
+      "n": 1,
+      "p50": 0.01,
+      "p95": 0.01,
+      "min": 0.01,
+      "max": 0.01
+    }
+  },
+  "failures": 0,
+  "samples": [
+    {
+      "i": 0,
+      "path": "direct",
+      "ok": true,
+      "status": 200,
+      "ttftMs": 5456.309667,
+      "ttftKind": "reasoning",
+      "totalMs": 6038.612459,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": null,
+      "entitlementCache": null
+    },
+    {
+      "i": 0,
+      "path": "gateway",
+      "ok": true,
+      "status": 200,
+      "ttftMs": 4415.121042,
+      "ttftKind": "reasoning",
+      "totalMs": 5005.927624999999,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": 463.97,
+      "entitlementCache": "miss"
+    },
+    {
+      "i": 1,
+      "path": "gateway",
+      "ok": true,
+      "status": 200,
+      "ttftMs": 4659.522958,
+      "ttftKind": "reasoning",
+      "totalMs": 5075.178583000001,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": 0.01,
+      "entitlementCache": "hit"
+    },
+    {
+      "i": 1,
+      "path": "direct",
+      "ok": true,
+      "status": 200,
+      "ttftMs": 4341.339,
+      "ttftKind": "reasoning",
+      "totalMs": 5135.171249999999,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": null,
+      "entitlementCache": null
+    },
+    {
+      "i": 2,
+      "path": "direct",
+      "ok": true,
+      "status": 200,
+      "ttftMs": 4160.516416999999,
+      "ttftKind": "reasoning",
+      "totalMs": 5829.100416999998,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": null,
+      "entitlementCache": null
+    },
+    {
+      "i": 2,
+      "path": "gateway",
+      "ok": true,
+      "status": 200,
+      "ttftMs": 3343.0159999999996,
+      "ttftKind": "reasoning",
+      "totalMs": 4060.647000000001,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": 736.35,
+      "entitlementCache": "miss"
+    }
+  ]
+}

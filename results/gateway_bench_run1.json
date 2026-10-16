@@ -1,0 +1,370 @@
+{
+  "script": "sim/src/bench.ts",
+  "generatedAt": "2026-10-16T07:15:10.937Z",
+  "git": {
+    "commit": "27c6b56",
+    "dirty": true
+  },
+  "model": "qwen3:8b",
+  "maxTokens": 64,
+  "pairs": 12,
+  "requestsSent": 24,
+  "aipg": "https://api.aipowergrid.io",
+  "gateway": "http://localhost:8787",
+  "note": "Network-dominated: grid inference latency varies with worker load, so overhead is reported as paired differences (gateway − direct, same iteration). Failed requests are kept in samples with ok=false.",
+  "ttftMs": {
+    "direct": {
+      "n": 0,
+      "p50": null,
+      "p95": null,
+      "min": null,
+      "max": null
+    },
+    "gateway": {
+      "n": 0,
+      "p50": null,
+      "p95": null,
+      "min": null,
+      "max": null
+    }
+  },
+  "totalMs": {
+    "direct": {
+      "n": 0,
+      "p50": null,
+      "p95": null,
+      "min": null,
+      "max": null
+    },
+    "gateway": {
+      "n": 0,
+      "p50": null,
+      "p95": null,
+      "min": null,
+      "max": null
+    }
+  },
+  "gatewayOverheadMs": {
+    "ttft": {
+      "n": 0,
+      "p50": null,
+      "p95": null,
+      "min": null,
+      "max": null
+    },
+    "total": {
+      "n": 0,
+      "p50": null,
+      "p95": null,
+      "min": null,
+      "max": null
+    }
+  },
+  "entitlementCheckMs": {
+    "uncached": {
+      "n": 0,
+      "p50": null,
+      "p95": null,
+      "min": null,
+      "max": null
+    },
+    "cached": {
+      "n": 0,
+      "p50": null,
+      "p95": null,
+      "min": null,
+      "max": null
+    }
+  },
+  "failures": 0,
+  "samples": [
+    {
+      "i": 0,
+      "path": "direct",
+      "ok": true,
+      "status": 200,
+      "ttftMs": null,
+      "totalMs": 18535.870958,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": null,
+      "entitlementCache": null
+    },
+    {
+      "i": 0,
+      "path": "gateway",
+      "ok": true,
+      "status": 200,
+      "ttftMs": null,
+      "totalMs": 7257.669875,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": 653.77,
+      "entitlementCache": "miss"
+    },
+    {
+      "i": 1,
+      "path": "gateway",
+      "ok": true,
+      "status": 200,
+      "ttftMs": null,
+      "totalMs": 5041.765749999999,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": 0.02,
+      "entitlementCache": "hit"
+    },
+    {
+      "i": 1,
+      "path": "direct",
+      "ok": true,
+      "status": 200,
+      "ttftMs": null,
+      "totalMs": 4937.482625000001,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": null,
+      "entitlementCache": null
+    },
+    {
+      "i": 2,
+      "path": "direct",
+      "ok": true,
+      "status": 200,
+      "ttftMs": null,
+      "totalMs": 5016.034833999998,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": null,
+      "entitlementCache": null
+    },
+    {
+      "i": 2,
+      "path": "gateway",
+      "ok": true,
+      "status": 200,
+      "ttftMs": null,
+      "totalMs": 5015.934208000006,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": 390,
+      "entitlementCache": "miss"
+    },
+    {
+      "i": 3,
+      "path": "gateway",
+      "ok": true,
+      "status": 200,
+      "ttftMs": null,
+      "totalMs": 4970.492333000002,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": 0.01,
+      "entitlementCache": "hit"
+    },
+    {
+      "i": 3,
+      "path": "direct",
+      "ok": true,
+      "status": 200,
+      "ttftMs": null,
+      "totalMs": 4983.4259999999995,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": null,
+      "entitlementCache": null
+    },
+    {
+      "i": 4,
+      "path": "direct",
+      "ok": true,
+      "status": 200,
+      "ttftMs": null,
+      "totalMs": 5221.0609170000025,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": null,
+      "entitlementCache": null
+    },
+    {
+      "i": 4,
+      "path": "gateway",
+      "ok": true,
+      "status": 200,
+      "ttftMs": null,
+      "totalMs": 2521.714,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": 416.62,
+      "entitlementCache": "miss"
+    },
+    {
+      "i": 5,
+      "path": "gateway",
+      "ok": true,
+      "status": 200,
+      "ttftMs": null,
+      "totalMs": 5075.476624999996,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": 0,
+      "entitlementCache": "hit"
+    },
+    {
+      "i": 5,
+      "path": "direct",
+      "ok": true,
+      "status": 200,
+      "ttftMs": null,
+      "totalMs": 4999.263625000007,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": null,
+      "entitlementCache": null
+    },
+    {
+      "i": 6,
+      "path": "direct",
+      "ok": true,
+      "status": 200,
+      "ttftMs": null,
+      "totalMs": 5213.4437920000055,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": null,
+      "entitlementCache": null
+    },
+    {
+      "i": 6,
+      "path": "gateway",
+      "ok": true,
+      "status": 200,
+      "ttftMs": null,
+      "totalMs": 5149.948208000002,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": 440.17,
+      "entitlementCache": "miss"
+    },
+    {
+      "i": 7,
+      "path": "gateway",
+      "ok": true,
+      "status": 200,
+      "ttftMs": null,
+      "totalMs": 4945.352583,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": 0,
+      "entitlementCache": "hit"
+    },
+    {
+      "i": 7,
+      "path": "direct",
+      "ok": true,
+      "status": 200,
+      "ttftMs": null,
+      "totalMs": 4671.287208000009,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": null,
+      "entitlementCache": null
+    },
+    {
+      "i": 8,
+      "path": "direct",
+      "ok": true,
+      "status": 200,
+      "ttftMs": null,
+      "totalMs": 5163.048957999999,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": null,
+      "entitlementCache": null
+    },
+    {
+      "i": 8,
+      "path": "gateway",
+      "ok": true,
+      "status": 200,
+      "ttftMs": null,
+      "totalMs": 4831.7495419999905,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": 443.2,
+      "entitlementCache": "miss"
+    },
+    {
+      "i": 9,
+      "path": "gateway",
+      "ok": true,
+      "status": 200,
+      "ttftMs": null,
+      "totalMs": 5063.371666000006,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": 0.01,
+      "entitlementCache": "hit"
+    },
+    {
+      "i": 9,
+      "path": "direct",
+      "ok": true,
+      "status": 200,
+      "ttftMs": null,
+      "totalMs": 5088.849333000006,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": null,
+      "entitlementCache": null
+    },
+    {
+      "i": 10,
+      "path": "direct",
+      "ok": true,
+      "status": 200,
+      "ttftMs": null,
+      "totalMs": 2287.589208000005,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": null,
+      "entitlementCache": null
+    },
+    {
+      "i": 10,
+      "path": "gateway",
+      "ok": true,
+      "status": 200,
+      "ttftMs": null,
+      "totalMs": 5175.764457999991,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": 718.18,
+      "entitlementCache": "miss"
+    },
+    {
+      "i": 11,
+      "path": "gateway",
+      "ok": true,
+      "status": 200,
+      "ttftMs": null,
+      "totalMs": 5081.228166999994,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": 0.02,
+      "entitlementCache": "hit"
+    },
+    {
+      "i": 11,
+      "path": "direct",
+      "ok": true,
+      "status": 200,
+      "ttftMs": null,
+      "totalMs": 4900.331292000003,
+      "completionTokens": 64,
+      "gridJobId": null,
+      "entitlementMs": null,
+      "entitlementCache": null
+    }
+  ]
+}

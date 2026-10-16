@@ -1,0 +1,63 @@
+{
+  "script": "sim/src/epochs.ts",
+  "generatedAt": "2026-10-16T07:21:07.818Z",
+  "git": {
+    "commit": "27c6b56",
+    "dirty": true
+  },
+  "gateway": "http://localhost:8787",
+  "chainId": 11155111,
+  "explorer": "https://sepolia.etherscan.io",
+  "mode": "live",
+  "epochSeconds": 300,
+  "registry": "0x3fF143e67616114B4F638b332BaF060Cb8e8696C",
+  "epochs": [
+    {
+      "planId": "1",
+      "epoch": 5973783,
+      "root": "0x3e42bb99d0b9673a2e0dfa792b109004a2238e9bbef6bfab7edc95e5553bcb37",
+      "rowCount": 8,
+      "totalTokens": 1255,
+      "txHash": "0x42abd05bb21ee27a7efdb1db015692bfddacec8b901c72e9b4fc1b45a1e6231d",
+      "committedAt": 1792135251
+    },
+    {
+      "planId": "1",
+      "epoch": 5973782,
+      "root": "0x376ba448e21fdb3d632b744383ddb64eb9b8672e2747a5634efe8e35409a30f7",
+      "rowCount": 10,
+      "totalTokens": 850,
+      "txHash": "0x5323c9a3df505faf22e9ad5967112f2b41fc9282f3436dbb455da6fdbc5e6478",
+      "committedAt": 1792134928
+    }
+  ],
+  "totals": {
+    "epochs": 2,
+    "rows": 18,
+    "tokens": 2105
+  },
+  "verifiedInclusionProof": {
+    "epoch": 5973783,
+    "rowId": 11,
+    "leaf": {
+      "epoch": "5973783",
+      "wallet": "0x6b8d840f5982faf22f5f2bfd0545a44ebbfb9f4a",
+      "subId": "2",
+      "model": "qwen3:8b",
+      "promptTokens": "21",
+      "completionTokens": "64",
+      "requestHash": "0xc3d8a505bde6ab087465aa25ba91c538bc98107832ca17f92f3acb3a7c00407c",
+      "responseHash": "0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470",
+      "timestamp": "1792134900"
+    },
+    "leafHash": "0x80add49581d9aa6ae62871e63e4bdaa05740100b93f9b9fa9e6b0e5c3037692c",
+    "proof": [
+      "0x5ecf96de1043d3ac6aa4c2383d553c782059a23b5d04fdbfd4665f0b562fa557",
+      "0xdfa31268e80a2c9e5784c524647daf9dde2e1433eefe83750eaa17430a5b388d",
+      "0x9f865ad1fae534028edfab3628e67260feca9c36bf81e1b587b72329fd7fec18"
+    ],
+    "gatewayRoot": "0x3e42bb99d0b9673a2e0dfa792b109004a2238e9bbef6bfab7edc95e5553bcb37",
+    "onchainRoot": "0x3e42bb99d0b9673a2e0dfa792b109004a2238e9bbef6bfab7edc95e5553bcb37",
+    "verifyRow": true
+  }
+}

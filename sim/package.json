@@ -15,7 +15,8 @@
     "bench": "tsx src/bench.ts",
     "summarize": "tsx src/summarize.ts",
     "typecheck": "tsc --noEmit",
-    "epochs": "tsx src/epochs.ts"
+    "epochs": "tsx src/epochs.ts",
+    "gateway-key": "tsx src/gateway-key.ts"
   },
   "dependencies": {
     "@cashew/keeper": "workspace:*",

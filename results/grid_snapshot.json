@@ -1,28 +1,31 @@
 {
   "script": "sim/src/grid-snapshot.ts",
-  "generatedAt": "2026-10-16T06:03:08.070Z",
+  "generatedAt": "2026-10-16T07:21:13.114Z",
   "git": {
-    "commit": "9f2b0ce",
+    "commit": "27c6b56",
     "dirty": true
   },
   "baseUrl": "https://api.aipowergrid.io",
   "summary": {
-    "workersOnline": 8,
+    "workersOnline": 11,
     "textModelsOnline": [
       "qwen38-flash-next-uncensored-125b-nvfp4",
+      "qwen3:8b",
       "gpt-oss-120b",
+      "qwen3:1.7b",
+      "qwen3:4b",
       "deepseek-v4-flash-nvfp4"
     ],
-    "qwen3WorkerOnline": false,
+    "qwen3WorkerOnline": true,
     "workersOnlineNote": "count of entries returned by /v1/workers",
     "ourWorkers": null,
     "ourWorkersNote": "set AIPG_OUR_WORKERS=<name,…> to identify our worker(s)"
   },
   "workers": {
     "status": 200,
-    "ms": 1113,
+    "ms": 4247,
     "body": {
-      "count": 8,
+      "count": 11,
       "workers": [
         {
           "id": "d689e61c-340d-4402-bc43-6f8c170c3e93",
@@ -47,6 +50,72 @@
           "online": true
         },
         {
+          "id": "0d498cbf-e8a6-4e11-bcd0-62252e1bd9d5",
+          "name": "aipg-ltx25-rig-gpu1",
+          "models": [
+            "LTX-2.5 Distilled BF16"
+          ],
+          "job_types": [
+            "video"
+          ],
+          "online": true
+        },
+        {
+          "id": "42849a29-d171-4147-ada4-383cab45f6d3",
+          "name": "Text-Inference-Worker-gorgadon-qwen3-8b",
+          "models": [
+            "qwen3:8b"
+          ],
+          "job_types": [
+            "text"
+          ],
+          "online": true
+        },
+        {
+          "id": "b15ab45d-e7fe-4108-98b7-bc6c671e4ea0",
+          "name": "gorgadon-audio-3090",
+          "models": [
+            "ace-step-v1.5-xl-turbo"
+          ],
+          "job_types": [
+            "audio"
+          ],
+          "online": true
+        },
+        {
+          "id": "87495ad5-e6cd-49b6-b01d-252011a9c6bc",
+          "name": "rack-gptoss-worker-gpt-oss-120b",
+          "models": [
+            "gpt-oss-120b"
+          ],
+          "job_types": [
+            "text"
+          ],
+          "online": true
+        },
+        {
+          "id": "47ed8b38-bdc6-4db0-8b1b-cdabad440319",
+          "name": "gorgadon-ltx25-nvfp4",
+          "models": [
+            "LTX-2.5 Distilled NVFP4"
+          ],
+          "job_types": [
+            "video"
+          ],
+          "online": true
+        },
+        {
+          "id": "41cb6139-7f44-45dc-a933-e5962dd135ac",
+          "name": "Text-Inference-Worker-gorgadon-qwen3-1-7b",
+          "models": [
+            "qwen3:1.7b"
+          ],
+          "job_types": [
+            "text"
+          ],
+          "online": true
+        },
+        {
           "id": "18fd248b-ca5d-47d2-9d28-1bccc6951ce3",
           "name": "half5090beast1",
           "models": [
@@ -60,10 +129,10 @@
           "online": true
         },
         {
-          "id": "87495ad5-e6cd-49b6-b01d-252011a9c6bc",
-          "name": "rack-gptoss-worker-gpt-oss-120b",
+          "id": "1629e486-4a0e-48a9-a466-cc9e13605f63",
+          "name": "Text-Inference-Worker-gorgadon-qwen3-4b",
           "models": [
-            "gpt-oss-120b"
+            "qwen3:4b"
           ],
           "job_types": [
             "text"
@@ -80,46 +149,13 @@
             "text"
           ],
           "online": true
-        },
-        {
-          "id": "0d498cbf-e8a6-4e11-bcd0-62252e1bd9d5",
-          "name": "aipg-ltx25-rig-gpu1",
-          "models": [
-            "LTX-2.5 Distilled BF16"
-          ],
-          "job_types": [
-            "video"
-          ],
-          "online": true
-        },
-        {
-          "id": "b15ab45d-e7fe-4108-98b7-bc6c671e4ea0",
-          "name": "gorgadon-audio-3090",
-          "models": [
-            "ace-step-v1.5-xl-turbo"
-          ],
-          "job_types": [
-            "audio"
-          ],
-          "online": true
-        },
-        {
-          "id": "47ed8b38-bdc6-4db0-8b1b-cdabad440319",
-          "name": "gorgadon-ltx25-nvfp4",
-          "models": [
-            "LTX-2.5 Distilled NVFP4"
-          ],
-          "job_types": [
-            "video"
-          ],
-          "online": true
         }
       ]
     }
   },
   "models": {
     "status": 200,
-    "ms": 743,
+    "ms": 338,
     "body": [
       {
         "name": "LTX-2.5 Distilled BF16",
@@ -234,6 +270,57 @@
         "tokens_per_s": null,
         "avg_ttft_s": null,
         "avg_latency_s": null,
+        "pricing": {
+          "currency": "USD",
+          "input_per_mtok_usd": 0.075,
+          "output_per_mtok_usd": 0.3,
+          "source": "default",
+          "version": "2026-10-15-a"
+        }
+      },
+      {
+        "name": "qwen3:1.7b",
+        "count": 1,
+        "type": "text",
+        "max_context_length": 40960,
+        "samples": 1,
+        "tokens_per_s": 113.4,
+        "avg_ttft_s": 52.95,
+        "avg_latency_s": 53.2,
+        "pricing": {
+          "currency": "USD",
+          "input_per_mtok_usd": 0.075,
+          "output_per_mtok_usd": 0.3,
+          "source": "default",
+          "version": "2026-10-15-a"
+        }
+      },
+      {
+        "name": "qwen3:4b",
+        "count": 1,
+        "type": "text",
+        "max_context_length": 8192,
+        "samples": 0,
+        "tokens_per_s": null,
+        "avg_ttft_s": null,
+        "avg_latency_s": null,
+        "pricing": {
+          "currency": "USD",
+          "input_per_mtok_usd": 0.075,
+          "output_per_mtok_usd": 0.3,
+          "source": "default",
+          "version": "2026-10-15-a"
+        }
+      },
+      {
+        "name": "qwen3:8b",
+        "count": 1,
+        "type": "text",
+        "max_context_length": 40960,
+        "samples": 34,
+        "tokens_per_s": 102.3,
+        "avg_ttft_s": 3.63,
+        "avg_latency_s": 4.39,
         "pricing": {
           "currency": "USD",
           "input_per_mtok_usd": 0.075,

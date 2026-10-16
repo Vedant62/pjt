@@ -1,6 +1,6 @@
 # Cashew — Results
 
-Generated 2026-10-16T05:19:12.564Z at commit `4439796` (uncommitted changes present) by `sim/src/summarize.ts`.
+Generated 2026-10-16T07:21:15.168Z at commit `27c6b56` (uncommitted changes present) by `sim/src/summarize.ts`.
 
 Every number below is copied from a JSON file in this directory that a script wrote while running. Anything that could not be measured is reported as **null** with the reason.
 
@@ -107,21 +107,57 @@ The real keeper process was stopped with SIGTERM (exit code 0, logged graceful s
 
 _Source: `sim/src/outage.ts` at 2026-10-16T04:50:10.514Z, commit `4439796` (dirty tree)._
 
-## 7. Base Sepolia lifecycle
+## 7. Testnet lifecycle (chain 11155111)
 
-**null** — `results/lifecycle_testnet.json` not present. Not run yet: needs the Base Sepolia deployment (`pnpm deploy:testnet`) and two funded testnet keys (`pnpm results:testnet`).
+| Step | Status after | Entitled | Charges | Gas | Tx |
+|---|---|---|---:|---:|---|
+| subscribeWithPermit | Active | true | 1 | 1,169,819 | [0x4d3f5e74…](https://sepolia.etherscan.io/tx/0x4d3f5e74a18eb936f3784a1e8fc8529ebc939a3868910140dd227a938c89aaac) |
+| keeper charge | Active | true | 2 | 210,352 | [0x388e2e3e…](https://sepolia.etherscan.io/tx/0x388e2e3e274fedd10fe1d6e493ea6b0a603b92c798ef5ceeefea651dc2c73f3b) |
+| keeper charge | Active | true | 3 | 112,432 | [0x86da8d2b…](https://sepolia.etherscan.io/tx/0x86da8d2b350c58709dfef986a80a339c7bc33b07a8f5c4a43a34279bfe21f851) |
+| keeper charge | Active | true | 4 | 112,432 | [0xf0a39e95…](https://sepolia.etherscan.io/tx/0xf0a39e9501261b41f9edb3fadf91c051be13b4c7febf35bc12e267af5b4473ce) |
+| drain balance | Active | true | 4 | 128,922 | [0x89dde093…](https://sepolia.etherscan.io/tx/0x89dde093e971ea81ba63ff3bfcdbda6086c5d7c3c0e7ec9c6b0caf8263c59889) |
+| keeper charge | PastDue | true | 4 | 45,160 | [0x8d4b19ef…](https://sepolia.etherscan.io/tx/0x8d4b19ef76ee0b51a3956a2aa29e183b6164bf40f08ed2b231992ae5a72f6df1) |
+| top up (mint 100) | PastDue | true | 4 | 140,615 | [0x74c5d44b…](https://sepolia.etherscan.io/tx/0x74c5d44b4a7dae326d1163dffcefa09677f5c1a9acf02980388315cc4d920563) |
+| keeper charge | Active | true | 5 | 112,472 | [0xdba7effd…](https://sepolia.etherscan.io/tx/0xdba7effd4ada6d30d69a59dc0b93bb943176b1448ef0ab3467ec432967441787) |
+| cancel | Cancelled | true | 5 | 31,658 | [0xd6efc31e…](https://sepolia.etherscan.io/tx/0xd6efc31eebeda3ac4b89932454066351c0ad4fcdced99f7197465d0575088590) |
+| after cancel (before paid-through) | Cancelled | true | 5 | null | — |
+| after paid-through | Cancelled | false | 5 | null | — |
+
+_Source: `sim/src/lifecycle.ts` at 2026-10-16T07:10:06.145Z, commit `a277c9d` (dirty tree)._
+
 ## 8. AI Power Grid snapshot
 
-**null** — `results/grid_snapshot.json` not present. Not run yet: `pnpm results:testnet` (uses no inference credits).
+Workers online (entries in /v1/workers): **11**. set AIPG_OUR_WORKERS=<name,…> to identify our worker(s). HTTP status: workers 200, models 200.
+
+_Source: `sim/src/grid-snapshot.ts` at 2026-10-16T07:21:13.114Z, commit `27c6b56` (dirty tree)._
+
 ## 9. Gateway latency (live AIPG)
 
-**null** — `results/gateway_bench.json` not present. Not run yet: needs AIPG_MODE=live, an AIPG API key and an entitled gateway key (`pnpm results:testnet`, ≤ 30 live requests).
+6 live requests (3 pairs, 0 failed), `qwen3:8b`, max_tokens 64.
+
+| Metric | Direct p50 | Direct p95 | Gateway p50 | Gateway p95 |
+|---|---:|---:|---:|---:|
+| TTFT (ms) | 4,341 | 5,345 | 4,415 | 4,635 |
+| Total (ms) | 5,829 | 6,018 | 5,006 | 5,068 |
+
+An earlier run (`gateway_bench_run1.json`, 24 requests) measured total latency only: direct p50 null ms, gateway p50 null ms (n=0 each). Its TTFT is **null**, because the bench then only counted `delta.content`, and qwen3 spent all 64 tokens on reasoning. The run above counts the first token of any kind. Bench requests across both runs: 30 (limit 30). AIPG did not return an `X-Grid-Job-ID` header, so `gridJobId` is null on every row.
+
+Gateway overhead (paired, gateway − direct): TTFT p50 -818 ms, p95 205 ms. Entitlement check: uncached p50 600.16 ms (n=2), cached p50 0.01 ms (n=1).
+
+![fig_ttft.png](fig_ttft.png)
+
+_Source: `sim/src/bench.ts` at 2026-10-16T07:16:11.051Z, commit `27c6b56` (dirty tree)._
+
 ## 10. Usage epochs
 
-**null** — `results/epochs.json` not present. Not run yet: produced from the testnet gateway after epochs commit (`pnpm results:testnet`).
+2 epochs committed (18 rows, 2,105 tokens) on chain 11155111, gateway mode live. Inclusion proof for row 11 in epoch 5973783: `verifyRow` = **true** (proof length 3).
+
+_Source: `sim/src/epochs.ts` at 2026-10-16T07:21:07.818Z, commit `27c6b56` (dirty tree)._
+
 ## Assumptions and caveats
 
-- Local experiments run on anvil (chainId 31337), with time travel where stated. Gas is EVM gas, which is identical on Base. Fees are not.
+- Local experiments run on anvil (chainId 31337), with time travel where stated. Gas is EVM gas, which is identical on Base and Ethereum. Fees are not.
+- The public testnet deployment is Ethereum Sepolia (11155111). The cost model (section 4) still uses the measured Base Sepolia gas price, so its dollar figures describe Base.
 - The Foundry gas report measures execution gas only. Receipt gas (sections 3, 5) includes intrinsic and calldata gas.
 - Cost-model rows marked "assumed" depend on ETH/USD and gas-price assumptions stated in section 4.
 - The gateway is a trusted metering party: an epoch root proves only what the gateway recorded.

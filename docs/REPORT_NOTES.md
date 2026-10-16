@@ -66,6 +66,8 @@ errors: NotCommitter, ZeroRoot, RootAlreadyCommitted(planId, epoch)
 | D19 | `local:up` seeds one cancelled subscription | Gives attack #3 a target immediately. |
 | D20 | Testnet is Ethereum Sepolia (11155111) instead of Base Sepolia | No Base Sepolia faucet was usable without mainnet ETH. The contracts are chain-agnostic, and Base Sepolia (84532) is still supported (`--chain 84532`). `cost_model.json` still uses the measured Base Sepolia gas price, so the cost analysis applies to Base. |
 | D21 | Testnet deploys use `forge script --skip-simulation` | At the time of deployment, Sepolia's fork charged about 5× the cancun price for contract creation (receipts: MockUSDC 6.53M gas, SubscriptionVault 11.65M gas), so Forge's local gas simulation ran out of gas twice. With `--skip-simulation`, Forge takes gas limits from the node's `eth_estimateGas`. Local and anvil gas figures in `results/` are cancun-priced; Base Sepolia and Base mainnet pricing still applies to the cost model. |
+| D22 | Live bench ran in two parts: 12 pairs (`gateway_bench_run1.json`) + 3 pairs (`gateway_bench.json`) = 30 requests | Run 1 counted TTFT only on `delta.content`, but qwen3 spent all 64 tokens on reasoning, so its TTFT is null. Run 2 counts the first token of any kind and uses the remaining 6 requests of the 30-request limit. TTFT statistics therefore have n = 3 per path. Grid queueing variance (seconds) swamps gateway overhead, which shows up as a paired difference near zero, sometimes negative. |
+| D23 | `gridJobId` is null on every live row | AIPG returned no `X-Grid-Job-ID` header during the runs. The gateway captures it when present. |
 
 ## 3. Design decisions
 

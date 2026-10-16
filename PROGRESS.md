@@ -35,12 +35,17 @@
 Deviation: the testnet is **Ethereum Sepolia (11155111)** because no Base Sepolia ETH could be obtained. Base Sepolia stays supported (`--chain 84532`); see REPORT_NOTES D20.
 `contracts/.env`, `keeper/.env`, `gateway/.env` and `sim/.env` are filled (gitignored). ✅ Deployed, seeded and Etherscan-verified on Sepolia (addresses in REPORT_NOTES §7). This needed `--skip-simulation` because of Sepolia's creation-gas repricing (D21). The keeper, gateway and subscriber wallets still need funding.
 1. ~~`pnpm deploy:testnet`~~ done.
-2. `pnpm testnet:up`.
-3. Stop the keeper, then `cd sim && pnpm lifecycle`. `grid_snapshot.json` is done: it shows no qwen3 worker online at run time.
+2. ✅ `lifecycle_testnet.json`: subscribe → 3 keeper charges → drain → PastDue (entitled in grace) → top up → recovered → cancel → entitled until paid-through → not entitled. Every step has a tx hash on Sepolia Etherscan. The subscribe row's state was re-read on-chain at its block (script bug, now fixed).
+3. ✅ `pnpm testnet:up` verified: keeper + gateway healthy on chain 11155111.
 4. Paste the addresses into docs/REPORT_NOTES.md §7.
 
-## Phase 7 — Live AIPG ⏳ (key stored; blocked until a qwen3 worker is online)
+## Phase 7 — Live AIPG ✅
+qwen3 workers came online. Gateway in live mode on Sepolia. Bench: 30 live requests across two runs (D22). Plus 3 real chats. 2 epochs committed (18 rows, 2,105 tokens); an inclusion proof verified on-chain (`epochs.json`). Gateway live budget used: 18 of 150 (the bench's direct requests bypass the gateway).
+
+<details><summary>Original phase-7 plan</summary>
+
 `AIPG_MODE=live` in gateway/.env → create a `csk_` key on /chat for an entitled wallet → `cd sim && pnpm bench` (24 requests by default, asks first) → 3–5 real chats → wait for 2 epochs → `pnpm epochs` → `pnpm results:summary`.
+</details>
 
 ## Phase 8 — Docs (drafted)
 ARCHITECTURE.md, DEMO.md, REPORT_NOTES.md and README are written. Screenshots (`docs/screenshots/`, Playwright 1440×900) are deferred until after phase 7, per spec.
