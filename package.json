@@ -1,0 +1,11 @@
+{
+  "name": "cashew",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Decentralized recurring payments on EVM chains, demonstrated on AI Power Grid access",
+  "packageManager": "pnpm@9.9.0",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test:contracts": "cd contracts && forge test -vvv"
+  }
+}
