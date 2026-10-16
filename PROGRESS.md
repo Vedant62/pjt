@@ -33,8 +33,8 @@
 
 ## Phase 6 — Testnet ⏳ (target switched to Ethereum Sepolia)
 Deviation: the testnet is **Ethereum Sepolia (11155111)** because no Base Sepolia ETH could be obtained. Base Sepolia stays supported (`--chain 84532`); see REPORT_NOTES D20.
-`contracts/.env`, `keeper/.env`, `gateway/.env` and `sim/.env` are filled (gitignored). The deployer is funded; the keeper, gateway and subscriber wallets still need funding.
-1. `pnpm deploy:testnet` (deploy + seed + Etherscan verify + sync).
+`contracts/.env`, `keeper/.env`, `gateway/.env` and `sim/.env` are filled (gitignored). ✅ Deployed, seeded and Etherscan-verified on Sepolia (addresses in REPORT_NOTES §7). This needed `--skip-simulation` because of Sepolia's creation-gas repricing (D21). The keeper, gateway and subscriber wallets still need funding.
+1. ~~`pnpm deploy:testnet`~~ done.
 2. `pnpm testnet:up`.
 3. Stop the keeper, then `cd sim && pnpm lifecycle`. `grid_snapshot.json` is done: it shows no qwen3 worker online at run time.
 4. Paste the addresses into docs/REPORT_NOTES.md §7.

@@ -12,5 +12,17 @@ export default {
     "startBlock": 0,
     "demoPlanId": 1,
     "prodPlanId": 2
+  },
+  "11155111": {
+    "MockUSDC": "0x75e8B2f30a7c08cf3967A2745dFAb0CF418Ced96",
+    "PlanRegistry": "0x9109E3Af83D6499E4d433128B60CDAc5505Cc815",
+    "SubscriptionVault": "0x9bC880415C54122cB64463888Db6a94Bf285dB8a",
+    "UsageRootRegistry": "0x3fF143e67616114B4F638b332BaF060Cb8e8696C",
+    "gateway": "0x6c9e15ce9e9B812d7746DDab4926b2eBFE9fade2",
+    "deployer": "0xdb0C7Acf5560eA87eD7D5D7C570dF21092ac62E7",
+    "keeperFeeBps": 25,
+    "startBlock": 11925719,
+    "demoPlanId": 1,
+    "prodPlanId": 2
   }
 };

@@ -36,7 +36,8 @@ const run = (label, args, cwd = join(root, "contracts")) => {
   const r = spawnSync(args[0], args.slice(1), { cwd, env, stdio: "inherit" });
   if (r.status !== 0) (console.error(`✗ ${label}`), process.exit(1));
 };
-run(`deploy (${c.name}, ${chainId})`, ["forge", "script", "script/Deploy.s.sol", "--rpc-url", rpc, "--broadcast", "--slow", ...verify]);
-run("seed", ["forge", "script", "script/Seed.s.sol", "--rpc-url", rpc, "--broadcast", "--slow"]);
+// Sepolia reprices state creation (~5x cancun); --skip-simulation makes forge take gas limits from the node (eth_estimateGas).
+run(`deploy (${c.name}, ${chainId})`, ["forge", "script", "script/Deploy.s.sol", "--rpc-url", rpc, "--broadcast", "--slow", "--skip-simulation", ...verify]);
+run("seed", ["forge", "script", "script/Seed.s.sol", "--rpc-url", rpc, "--broadcast", "--slow", "--skip-simulation"]);
 run("sync ABIs", ["node", "packages/shared/scripts/sync.mjs"], root);
 console.log(`\nDone. Addresses: packages/shared/src/addresses.json (key ${chainId}). Commit them.`);

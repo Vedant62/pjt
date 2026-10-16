@@ -65,6 +65,7 @@ errors: NotCommitter, ZeroRoot, RootAlreadyCommitted(planId, epoch)
 | D18 | Dashboard: anvil-only "dev wallets" | Lets the local demo and fallback run without a browser extension. They use only the public anvil keys, only on chain 31337, and are disabled in `testnet:up`. |
 | D19 | `local:up` seeds one cancelled subscription | Gives attack #3 a target immediately. |
 | D20 | Testnet is Ethereum Sepolia (11155111) instead of Base Sepolia | No Base Sepolia faucet was usable without mainnet ETH. The contracts are chain-agnostic, and Base Sepolia (84532) is still supported (`--chain 84532`). `cost_model.json` still uses the measured Base Sepolia gas price, so the cost analysis applies to Base. |
+| D21 | Testnet deploys use `forge script --skip-simulation` | At the time of deployment, Sepolia's fork charged about 5× the cancun price for contract creation (receipts: MockUSDC 6.53M gas, SubscriptionVault 11.65M gas), so Forge's local gas simulation ran out of gas twice. With `--skip-simulation`, Forge takes gas limits from the node's `eth_estimateGas`. Local and anvil gas figures in `results/` are cancun-priced; Base Sepolia and Base mainnet pricing still applies to the cost model. |
 
 ## 3. Design decisions
 
@@ -122,13 +123,13 @@ errors: NotCommitter, ZeroRoot, RootAlreadyCommitted(planId, epoch)
 
 ## 7. Deployed addresses and verification
 
-_Ethereum Sepolia deployment pending (phase 6). After `pnpm deploy:testnet`, copy the addresses from `packages/shared/src/addresses.json` (key `11155111`) here with Etherscan links (https://sepolia.etherscan.io/address/…):_
+Ethereum Sepolia (chainId 11155111), deployed from `0xdb0C7Acf5560eA87eD7D5D7C570dF21092ac62E7` starting at block 11925719. Committer (gateway) `0x6c9e15ce9e9B812d7746DDab4926b2eBFE9fade2`, keeper fee 25 bps. Seeded demo plan #1 (20 mUSDC / 180 s / 60 s) and production-shaped plan #2 (20 mUSDC / 30 d / 3 d). Deployment receipts: `contracts/broadcast/{Deploy,Seed}.s.sol/11155111/run-latest.json`.
 
 | Contract | Address | Etherscan |
 |---|---|---|
-| MockUSDC | — | — |
-| PlanRegistry | — | — |
-| SubscriptionVault | — | — |
-| UsageRootRegistry | — | — |
+| MockUSDC | `0x75e8B2f30a7c08cf3967A2745dFAb0CF418Ced96` | [verified](https://sepolia.etherscan.io/address/0x75e8B2f30a7c08cf3967A2745dFAb0CF418Ced96#code) |
+| PlanRegistry | `0x9109E3Af83D6499E4d433128B60CDAc5505Cc815` | [verified](https://sepolia.etherscan.io/address/0x9109E3Af83D6499E4d433128B60CDAc5505Cc815#code) |
+| SubscriptionVault | `0x9bC880415C54122cB64463888Db6a94Bf285dB8a` | [verified](https://sepolia.etherscan.io/address/0x9bC880415C54122cB64463888Db6a94Bf285dB8a#code) |
+| UsageRootRegistry | `0x3fF143e67616114B4F638b332BaF060Cb8e8696C` | [verified](https://sepolia.etherscan.io/address/0x3fF143e67616114B4F638b332BaF060Cb8e8696C#code) |
 
 Local anvil (deterministic, chainId 31337): MockUSDC `0x5FbDB2315678afecb367f032d93F642f64180aa3`, PlanRegistry `0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512`, SubscriptionVault `0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0`, UsageRootRegistry `0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9`.
