@@ -24,3 +24,22 @@
 - Walked in a browser against `pnpm local:up` (mock mode): permit-subscribe (1 signature + 1 tx) → SIWE sign-in → streamed chat with tokens/TTFT → keeper charged automatically (drift 4 s, shown in /activity) → epoch root committed → /epochs proof verified on-chain (✓, tamper → ✗) → attack panel: all five reverts decoded; "send for real" broadcasts the reverting tx.
 - `local:up` seeds one cancelled subscription so attack #3 has a target; `DASHBOARD_PORT` overrides :3000.
 - Fixes found while walking: `scrollIntoView` returns a Promise in current Chromium (effect cleanup crash); wagmi's `writeContract` pre-simulates and its receipt wait throws on reverts (bypassed only for the deliberate attack broadcast); wallet SDKs touch `indexedDB` during SSR, so the wallet tree renders client-only.
+
+## Phase 5 — Local experiments ✅
+- `pnpm results:local` → `test_summary.json`, `gas_report.{json,md}`, `batch_sweep.json`, `cost_model.json`, `schedule_sim.json`, `keeper_outage.json`; `pnpm results:summary` → figures + `RESULTS.md`.
+- Batch sweep uses real anvil receipts (see REPORT_NOTES D10). The cost model measures the Base Sepolia gas price and L1 fee at run time; ETH/USD and a mainnet gas price are labelled assumptions.
+- Schedule sim: 500 subscribers, 12 × 30-day periods, ticks 60 s / 600 s / 1 h / 6 h, each on a fresh anvil (seeded jitter so due times don't align with the tick grid). The real `Keeper` class is used.
+- Outage: the real keeper process gets SIGTERM (graceful, exit 0), 3 periods pass, then it restarts; all missed charges are recovered, 0 lost, anchored schedule intact.
+
+## Phase 6 — Testnet ⏳ (needs your keys)
+Ready to run, not yet run (I have no funded Base Sepolia keys or Etherscan key):
+1. Fill `contracts/.env`, then `pnpm deploy:testnet` (deploy + seed + verify + sync).
+2. Fill `keeper/.env` and `gateway/.env` (CHAIN_ID=84532), then `pnpm testnet:up`.
+3. `cd sim && pnpm lifecycle` (needs `LIFECYCLE_SUBSCRIBER_KEY` and `LIFECYCLE_KEEPER_KEY` in `sim/.env`) and `pnpm grid-snapshot`.
+4. Paste the addresses into docs/REPORT_NOTES.md §7.
+
+## Phase 7 — Live AIPG ⏳ (needs AIPG key + credits)
+`AIPG_MODE=live` in gateway/.env → create a `csk_` key on /chat for an entitled wallet → `cd sim && pnpm bench` (24 requests by default, asks first) → 3–5 real chats → wait for 2 epochs → `pnpm epochs` → `pnpm results:summary`.
+
+## Phase 8 — Docs (drafted)
+ARCHITECTURE.md, DEMO.md, REPORT_NOTES.md and README are written. Screenshots (`docs/screenshots/`, Playwright 1440×900) are deferred until after phase 7, per spec.

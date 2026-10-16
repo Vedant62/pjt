@@ -1,0 +1,547 @@
+{
+  "script": "sim/src/test-summary.ts",
+  "generatedAt": "2026-10-16T04:46:15.931Z",
+  "git": {
+    "commit": "4439796",
+    "dirty": true
+  },
+  "command": "forge test --json",
+  "totals": {
+    "unit": {
+      "total": 68,
+      "passed": 68,
+      "failed": 0
+    },
+    "fuzz": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0
+    },
+    "invariantCampaigns": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0
+    },
+    "invariantPredicates": {
+      "total": 5,
+      "passed": 5,
+      "failed": 0
+    },
+    "all": {
+      "total": 72,
+      "passed": 72
+    }
+  },
+  "fuzz": {
+    "runsPerTest": [
+      1000
+    ],
+    "tests": [
+      {
+        "name": "testFuzz_AnchoredSchedule(uint32,uint8,uint256)",
+        "runs": 1000,
+        "status": "Success"
+      },
+      {
+        "name": "testFuzz_ChargeBeforeDueReverts(uint96,uint32,uint32,address)",
+        "runs": 1000,
+        "status": "Success"
+      },
+      {
+        "name": "testFuzz_ChargedAmountEqualsPrice(uint96,uint32,uint32)",
+        "runs": 1000,
+        "status": "Success"
+      }
+    ]
+  },
+  "invariant": {
+    "runs": 256,
+    "depth": 64,
+    "calls": 16384,
+    "reverts": 0,
+    "predicates": [
+      {
+        "name": "invariant_I1_noOvercharge",
+        "status": "Success"
+      },
+      {
+        "name": "invariant_I2_noChargeAfterTerminal",
+        "status": "Success"
+      },
+      {
+        "name": "invariant_I3_solvency",
+        "status": "Success"
+      },
+      {
+        "name": "invariant_I4_anchoredSchedule",
+        "status": "Success"
+      },
+      {
+        "name": "invariant_I5_ownFundsOnly",
+        "status": "Success"
+      }
+    ]
+  },
+  "keeperCannot": [
+    {
+      "name": "test_KeeperCannot_ChargeCancelled",
+      "status": "pass"
+    },
+    {
+      "name": "test_KeeperCannot_ChargeEarly",
+      "status": "pass"
+    },
+    {
+      "name": "test_KeeperCannot_ChargeTwiceInPeriod",
+      "status": "pass"
+    },
+    {
+      "name": "test_KeeperCannot_PullMoreThanPrice",
+      "status": "pass"
+    },
+    {
+      "name": "test_KeeperCannot_RedirectPayeeFunds",
+      "status": "pass"
+    }
+  ],
+  "tests": [
+    {
+      "suite": "test/MockUSDC.t.sol:MockUSDCTest",
+      "name": "test_Metadata()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/MockUSDC.t.sol:MockUSDCTest",
+      "name": "test_MintOpenToAnyone()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/MockUSDC.t.sol:MockUSDCTest",
+      "name": "test_PermitSetsAllowance()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/MockUSDC.t.sol:MockUSDCTest",
+      "name": "test_RevertWhen_MintAboveCap()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/PlanRegistry.t.sol:PlanRegistryTest",
+      "name": "test_CreatePlan()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/PlanRegistry.t.sol:PlanRegistryTest",
+      "name": "test_NoTermSetters()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/PlanRegistry.t.sol:PlanRegistryTest",
+      "name": "test_PlanIdsIncrement()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/PlanRegistry.t.sol:PlanRegistryTest",
+      "name": "test_RevertWhen_GraceEqualsPeriod()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/PlanRegistry.t.sol:PlanRegistryTest",
+      "name": "test_RevertWhen_GraceExceedsPeriod()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/PlanRegistry.t.sol:PlanRegistryTest",
+      "name": "test_RevertWhen_NonProviderSetsActive()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/PlanRegistry.t.sol:PlanRegistryTest",
+      "name": "test_RevertWhen_UnknownPlan()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/PlanRegistry.t.sol:PlanRegistryTest",
+      "name": "test_RevertWhen_ZeroPayee()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/PlanRegistry.t.sol:PlanRegistryTest",
+      "name": "test_RevertWhen_ZeroPeriod()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/PlanRegistry.t.sol:PlanRegistryTest",
+      "name": "test_RevertWhen_ZeroPrice()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/PlanRegistry.t.sol:PlanRegistryTest",
+      "name": "test_RevertWhen_ZeroToken()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/PlanRegistry.t.sol:PlanRegistryTest",
+      "name": "test_SetPlanActive()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.fuzz.t.sol:SubscriptionVaultFuzzTest",
+      "name": "testFuzz_AnchoredSchedule(uint32,uint8,uint256)",
+      "kind": "fuzz",
+      "status": "Success",
+      "runs": 1000
+    },
+    {
+      "suite": "test/SubscriptionVault.fuzz.t.sol:SubscriptionVaultFuzzTest",
+      "name": "testFuzz_ChargeBeforeDueReverts(uint96,uint32,uint32,address)",
+      "kind": "fuzz",
+      "status": "Success",
+      "runs": 1000
+    },
+    {
+      "suite": "test/SubscriptionVault.fuzz.t.sol:SubscriptionVaultFuzzTest",
+      "name": "testFuzz_ChargedAmountEqualsPrice(uint96,uint32,uint32)",
+      "kind": "fuzz",
+      "status": "Success",
+      "runs": 1000
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_Cancel()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_CancelPastDueNotEntitled()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_CatchUpAfterOutage()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_Charge()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_ChargeBatch()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_ChargeBatch_Empty()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_ChargeBatch_LapseCountsAsFailed()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_ChargeFailed_Allowance()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_ChargeFailed_Balance()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_ChargeWithZeroFee()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_Constructor()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_DueSubscriptions()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_DueSubscriptions_IncludesPastDue()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_EntitledSubOf_None()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_InactivePlanDoesNotAffectExistingSubs()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_IsEntitled_Transitions()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_KeeperCannot_ChargeCancelled()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_KeeperCannot_ChargeEarly()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_KeeperCannot_ChargeTwiceInPeriod()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_KeeperCannot_PullMoreThanPrice()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_KeeperCannot_RedirectPayeeFunds()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_LapseAfterGrace()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_LateChargeWithFundsSucceeds()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_PastDueThenLapse()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_RecoverFromPastDue()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_ResubscribeAfterCancel()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_ResubscribeAfterLapse()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_RevertWhen_BatchTooLarge()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_RevertWhen_CancelByNonSubscriber()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_RevertWhen_CancelTwice()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_RevertWhen_CancelUnknown()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_RevertWhen_ChargeUnknownSub()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_RevertWhen_DuplicateSubscription()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_RevertWhen_DuplicateWhilePastDue()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_RevertWhen_FeeTooHigh()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_RevertWhen_PermitInvalidAndNoAllowance()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_RevertWhen_PlanInactive()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_RevertWhen_SubscribeWithoutBalance()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_RevertWhen_UnknownPlan()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_RevertWhen_WithdrawZero()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_Subscribe()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_SubscribeWithPermit()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_SubscribeWithPermit_FrontRunFallback()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/SubscriptionVault.t.sol:SubscriptionVaultTest",
+      "name": "test_Withdraw()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/UsageRootRegistry.t.sol:UsageRootRegistryTest",
+      "name": "test_CommitAndVerify()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/UsageRootRegistry.t.sol:UsageRootRegistryTest",
+      "name": "test_HashRowMatchesStandardLeaf()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/UsageRootRegistry.t.sol:UsageRootRegistryTest",
+      "name": "test_RevertWhen_EpochCommittedTwice()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/UsageRootRegistry.t.sol:UsageRootRegistryTest",
+      "name": "test_RevertWhen_NonOwnerSetsCommitter()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/UsageRootRegistry.t.sol:UsageRootRegistryTest",
+      "name": "test_RevertWhen_NotCommitter()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/UsageRootRegistry.t.sol:UsageRootRegistryTest",
+      "name": "test_RevertWhen_ZeroRoot()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/UsageRootRegistry.t.sol:UsageRootRegistryTest",
+      "name": "test_SetCommitter()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/UsageRootRegistry.t.sol:UsageRootRegistryTest",
+      "name": "test_VerifyUncommittedEpochFalse()",
+      "kind": "unit",
+      "status": "Success"
+    },
+    {
+      "suite": "test/invariant/Invariants.t.sol:InvariantsTest",
+      "name": "invariant_I1_noOvercharge()",
+      "kind": "invariant",
+      "status": "Success",
+      "runs": 256,
+      "calls": 16384,
+      "reverts": 0
+    }
+  ]
+}

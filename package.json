@@ -12,7 +12,12 @@
     "test:gateway": "pnpm --filter @cashew/gateway test",
     "sync:abis": "node packages/shared/scripts/sync.mjs",
     "local:up": "node scripts/local-up.mjs",
-    "typecheck": "pnpm -r --filter './packages/*' --filter ./keeper --filter ./gateway --filter ./sim exec tsc --noEmit -p ."
+    "typecheck": "pnpm -r --filter './packages/*' --filter ./keeper --filter ./gateway --filter ./sim exec tsc --noEmit -p .",
+    "deploy:testnet": "node scripts/deploy-testnet.mjs",
+    "testnet:up": "node scripts/testnet-up.mjs",
+    "results:local": "cd contracts && forge build && cd ../sim && pnpm test-summary && pnpm gas-report && pnpm batch-sweep && pnpm cost && pnpm schedule && pnpm outage",
+    "results:testnet": "cd sim && pnpm lifecycle && pnpm grid-snapshot && pnpm bench && pnpm epochs",
+    "results:summary": "cd sim && (test -x .venv/bin/python || (python3 -m venv .venv && .venv/bin/pip install -q -r requirements.txt)) && .venv/bin/python plots.py && pnpm summarize"
   },
   "devDependencies": {
     "concurrently": "9.0.1",

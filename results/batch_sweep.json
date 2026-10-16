@@ -1,0 +1,75 @@
+{
+  "script": "sim/src/batch-sweep.ts",
+  "generatedAt": "2026-10-16T04:47:01.504Z",
+  "git": {
+    "commit": "4439796",
+    "dirty": true
+  },
+  "chain": "anvil (scratch, automine)",
+  "plan": {
+    "price": "20000000",
+    "period": 180,
+    "grace": 60
+  },
+  "keeperFeeBps": 25,
+  "note": "Receipt gasUsed of real transactions (includes 21,000 intrinsic + calldata). Steady state: payee and keeper claimable slots already non-zero.",
+  "singleCharge": {
+    "gasUsed": 71595,
+    "txHash": "0x4202335d0f3082b639496387a4bdc54e8c66d14976ce42978b07fa5b70ef1773"
+  },
+  "firstEverKeeperCharge": {
+    "gasUsed": 88695,
+    "note": "keeper claimable 0 → non-zero (cold SSTORE)"
+  },
+  "sweep": [
+    {
+      "batchSize": 1,
+      "totalGas": 72525,
+      "gasPerSubscriber": 72525,
+      "logs": 2,
+      "txHash": "0x2ed0a6472fdcc799b9c6a632898c8f963a317256f9abefc0c4a5562e79ffbb09"
+    },
+    {
+      "batchSize": 5,
+      "totalGas": 181700,
+      "gasPerSubscriber": 36340,
+      "logs": 10,
+      "txHash": "0x4afc18de8a66227d89d01a18e6888e042adec75bf8acd478b6036b5c10b89d77"
+    },
+    {
+      "batchSize": 10,
+      "totalGas": 318183,
+      "gasPerSubscriber": 31818,
+      "logs": 20,
+      "txHash": "0xbc276b71512de4f9690d3de26f58d22ca91a79c15818ebeeb6414d332f417ed2"
+    },
+    {
+      "batchSize": 25,
+      "totalGas": 727701,
+      "gasPerSubscriber": 29108,
+      "logs": 50,
+      "txHash": "0x32ab07c5a4196c98daee9a30f3bad7fed32b1549ec6e53a9bfbe83b4fa440396"
+    },
+    {
+      "batchSize": 50,
+      "totalGas": 1410472,
+      "gasPerSubscriber": 28209,
+      "logs": 100,
+      "txHash": "0x76b973dc59e53cbfdf6d0ce390b376753bfe7c40a397dadb137fad7a631ecf1f"
+    },
+    {
+      "batchSize": 100,
+      "totalGas": 2776919,
+      "gasPerSubscriber": 27769,
+      "logs": 200,
+      "txHash": "0xf736b96887f014d684723eab18ccc8d1e23ee0fa57e0198369683a89a31fd80e"
+    },
+    {
+      "batchSize": 200,
+      "totalGas": 5513435,
+      "gasPerSubscriber": 27567,
+      "logs": 400,
+      "txHash": "0x85f89f8dd39131cd3f9fc94ce95076f6c43428a429ee623cfb87f49995f0da90"
+    }
+  ]
+}

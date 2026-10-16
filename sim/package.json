@@ -1,0 +1,31 @@
+{
+  "name": "@cashew/sim",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test-summary": "tsx src/test-summary.ts",
+    "gas-report": "tsx src/gas-report.ts",
+    "batch-sweep": "tsx src/batch-sweep.ts",
+    "cost": "tsx src/cost.ts",
+    "schedule": "tsx src/schedule.ts",
+    "outage": "tsx src/outage.ts",
+    "lifecycle": "tsx src/lifecycle.ts",
+    "grid-snapshot": "tsx src/grid-snapshot.ts",
+    "bench": "tsx src/bench.ts",
+    "summarize": "tsx src/summarize.ts",
+    "typecheck": "tsc --noEmit",
+    "epochs": "tsx src/epochs.ts"
+  },
+  "dependencies": {
+    "@cashew/keeper": "workspace:*",
+    "@cashew/shared": "workspace:*",
+    "dotenv": "16.4.5",
+    "viem": "2.21.37"
+  },
+  "devDependencies": {
+    "@types/node": "20.16.11",
+    "tsx": "4.19.1",
+    "typescript": "5.6.3"
+  }
+}

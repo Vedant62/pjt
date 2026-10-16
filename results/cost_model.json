@@ -1,0 +1,327 @@
+{
+  "script": "sim/src/cost.ts",
+  "generatedAt": "2026-10-16T04:47:42.181Z",
+  "git": {
+    "commit": "4439796",
+    "dirty": true
+  },
+  "measured": {
+    "baseSepoliaGasPriceWei": "6000000",
+    "baseSepoliaGasPriceGwei": "0.006",
+    "atBlock": "48178885",
+    "rpc": "https://sepolia.base.org",
+    "l1FeeSource": "Base Sepolia GasPriceOracle 0x4200…000F getL1Fee(serialized unsigned tx) at run time",
+    "error": null
+  },
+  "assumptions": {
+    "ethUsd": {
+      "value": 3000,
+      "label": "ASSUMPTION (env ASSUME_ETH_USD)"
+    },
+    "baseMainnetL2GasPriceGwei": {
+      "value": 0.01,
+      "label": "ASSUMPTION (env ASSUME_BASE_MAINNET_GAS_GWEI); L1 data fee NOT included in this scenario"
+    },
+    "cycleUsd": {
+      "value": 20,
+      "label": "20 mUSDC plan price treated as 20 USD"
+    },
+    "keeperFee": "Keeper reward (0.25% of price = 0.05 USD) is a transfer from subscriber to keeper, not a gas cost; compare it with perSubscriberUsd to see whether keeping is profitable."
+  },
+  "rows": [
+    {
+      "op": "charge (single tx)",
+      "gas": 71595,
+      "gasSource": "receipt (batch_sweep.json)",
+      "subscribersCovered": 1,
+      "baseSepolia": {
+        "l2ExecutionWei": "429570000000",
+        "l1DataFeeWei": "92",
+        "totalWei": "429570000092",
+        "totalUsd": 0.0012887100002760001,
+        "perSubscriberUsd": 0.0012887100002760001,
+        "pctOf20UsdCyclePerSubscriber": 0.00644355000138
+      },
+      "assumedMainnetL2Only": {
+        "l2ExecutionWei": "715950000000",
+        "totalUsd": 0.00214785,
+        "perSubscriberUsd": 0.00214785,
+        "pctOf20UsdCyclePerSubscriber": 0.01073925,
+        "l1DataFeeExcluded": true
+      }
+    },
+    {
+      "op": "chargeBatch(1)",
+      "gas": 72525,
+      "gasSource": "receipt (batch_sweep.json)",
+      "subscribersCovered": 1,
+      "baseSepolia": {
+        "l2ExecutionWei": "435150000000",
+        "l1DataFeeWei": "92",
+        "totalWei": "435150000092",
+        "totalUsd": 0.001305450000276,
+        "perSubscriberUsd": 0.001305450000276,
+        "pctOf20UsdCyclePerSubscriber": 0.0065272500013799995
+      },
+      "assumedMainnetL2Only": {
+        "l2ExecutionWei": "725250000000",
+        "totalUsd": 0.0021757499999999997,
+        "perSubscriberUsd": 0.0021757499999999997,
+        "pctOf20UsdCyclePerSubscriber": 0.010878749999999998,
+        "l1DataFeeExcluded": true
+      }
+    },
+    {
+      "op": "chargeBatch(5)",
+      "gas": 181700,
+      "gasSource": "receipt (batch_sweep.json)",
+      "subscribersCovered": 5,
+      "baseSepolia": {
+        "l2ExecutionWei": "1090200000000",
+        "l1DataFeeWei": "92",
+        "totalWei": "1090200000092",
+        "totalUsd": 0.003270600000276,
+        "perSubscriberUsd": 0.0006541200000552,
+        "pctOf20UsdCyclePerSubscriber": 0.003270600000276
+      },
+      "assumedMainnetL2Only": {
+        "l2ExecutionWei": "1817000000000",
+        "totalUsd": 0.005451,
+        "perSubscriberUsd": 0.0010902,
+        "pctOf20UsdCyclePerSubscriber": 0.005451,
+        "l1DataFeeExcluded": true
+      }
+    },
+    {
+      "op": "chargeBatch(10)",
+      "gas": 318183,
+      "gasSource": "receipt (batch_sweep.json)",
+      "subscribersCovered": 10,
+      "baseSepolia": {
+        "l2ExecutionWei": "1909098000000",
+        "l1DataFeeWei": "112",
+        "totalWei": "1909098000112",
+        "totalUsd": 0.005727294000335999,
+        "perSubscriberUsd": 0.0005727294000335999,
+        "pctOf20UsdCyclePerSubscriber": 0.0028636470001679997
+      },
+      "assumedMainnetL2Only": {
+        "l2ExecutionWei": "3181830000000",
+        "totalUsd": 0.00954549,
+        "perSubscriberUsd": 0.0009545490000000001,
+        "pctOf20UsdCyclePerSubscriber": 0.004772745,
+        "l1DataFeeExcluded": true
+      }
+    },
+    {
+      "op": "chargeBatch(25)",
+      "gas": 727701,
+      "gasSource": "receipt (batch_sweep.json)",
+      "subscribersCovered": 25,
+      "baseSepolia": {
+        "l2ExecutionWei": "4366206000000",
+        "l1DataFeeWei": "206",
+        "totalWei": "4366206000206",
+        "totalUsd": 0.013098618000618,
+        "perSubscriberUsd": 0.00052394472002472,
+        "pctOf20UsdCyclePerSubscriber": 0.0026197236001236
+      },
+      "assumedMainnetL2Only": {
+        "l2ExecutionWei": "7277010000000",
+        "totalUsd": 0.021831029999999998,
+        "perSubscriberUsd": 0.0008732411999999999,
+        "pctOf20UsdCyclePerSubscriber": 0.004366205999999999,
+        "l1DataFeeExcluded": true
+      }
+    },
+    {
+      "op": "chargeBatch(50)",
+      "gas": 1410472,
+      "gasSource": "receipt (batch_sweep.json)",
+      "subscribersCovered": 50,
+      "baseSepolia": {
+        "l2ExecutionWei": "8462832000000",
+        "l1DataFeeWei": "357",
+        "totalWei": "8462832000357",
+        "totalUsd": 0.025388496001070997,
+        "perSubscriberUsd": 0.00050776992002142,
+        "pctOf20UsdCyclePerSubscriber": 0.0025388496001071
+      },
+      "assumedMainnetL2Only": {
+        "l2ExecutionWei": "14104720000000",
+        "totalUsd": 0.04231416,
+        "perSubscriberUsd": 0.0008462832,
+        "pctOf20UsdCyclePerSubscriber": 0.004231416,
+        "l1DataFeeExcluded": true
+      }
+    },
+    {
+      "op": "chargeBatch(100)",
+      "gas": 2776919,
+      "gasSource": "receipt (batch_sweep.json)",
+      "subscribersCovered": 100,
+      "baseSepolia": {
+        "l2ExecutionWei": "16661514000000",
+        "l1DataFeeWei": "664",
+        "totalWei": "16661514000664",
+        "totalUsd": 0.049984542001992004,
+        "perSubscriberUsd": 0.0004998454200199201,
+        "pctOf20UsdCyclePerSubscriber": 0.0024992271000996006
+      },
+      "assumedMainnetL2Only": {
+        "l2ExecutionWei": "27769190000000",
+        "totalUsd": 0.08330757,
+        "perSubscriberUsd": 0.0008330757,
+        "pctOf20UsdCyclePerSubscriber": 0.0041653785,
+        "l1DataFeeExcluded": true
+      }
+    },
+    {
+      "op": "chargeBatch(200)",
+      "gas": 5513435,
+      "gasSource": "receipt (batch_sweep.json)",
+      "subscribersCovered": 200,
+      "baseSepolia": {
+        "l2ExecutionWei": "33080610000000",
+        "l1DataFeeWei": "1283",
+        "totalWei": "33080610001283",
+        "totalUsd": 0.09924183000384901,
+        "perSubscriberUsd": 0.000496209150019245,
+        "pctOf20UsdCyclePerSubscriber": 0.0024810457500962254
+      },
+      "assumedMainnetL2Only": {
+        "l2ExecutionWei": "55134350000000",
+        "totalUsd": 0.16540305,
+        "perSubscriberUsd": 0.0008270152499999999,
+        "pctOf20UsdCyclePerSubscriber": 0.0041350762499999996,
+        "l1DataFeeExcluded": true
+      }
+    },
+    {
+      "op": "subscribeWithPermit",
+      "gas": 274892,
+      "gasSource": "gas_report median execution gas + 21,000 intrinsic (calldata gas not included)",
+      "subscribersCovered": 1,
+      "baseSepolia": {
+        "l2ExecutionWei": "1649352000000",
+        "l1DataFeeWei": null,
+        "totalWei": "1649352000000",
+        "totalUsd": 0.004948056,
+        "perSubscriberUsd": 0.004948056,
+        "pctOf20UsdCyclePerSubscriber": 0.024740280000000003
+      },
+      "assumedMainnetL2Only": {
+        "l2ExecutionWei": "2748920000000",
+        "totalUsd": 0.00824676,
+        "perSubscriberUsd": 0.00824676,
+        "pctOf20UsdCyclePerSubscriber": 0.04123380000000001,
+        "l1DataFeeExcluded": true
+      }
+    },
+    {
+      "op": "subscribe",
+      "gas": 262640,
+      "gasSource": "gas_report median execution gas + 21,000 intrinsic (calldata gas not included)",
+      "subscribersCovered": 1,
+      "baseSepolia": {
+        "l2ExecutionWei": "1575840000000",
+        "l1DataFeeWei": null,
+        "totalWei": "1575840000000",
+        "totalUsd": 0.00472752,
+        "perSubscriberUsd": 0.00472752,
+        "pctOf20UsdCyclePerSubscriber": 0.0236376
+      },
+      "assumedMainnetL2Only": {
+        "l2ExecutionWei": "2626400000000",
+        "totalUsd": 0.0078792,
+        "perSubscriberUsd": 0.0078792,
+        "pctOf20UsdCyclePerSubscriber": 0.039395999999999994,
+        "l1DataFeeExcluded": true
+      }
+    },
+    {
+      "op": "cancel",
+      "gas": 51458,
+      "gasSource": "gas_report median execution gas + 21,000 intrinsic (calldata gas not included)",
+      "subscribersCovered": 1,
+      "baseSepolia": {
+        "l2ExecutionWei": "308748000000",
+        "l1DataFeeWei": null,
+        "totalWei": "308748000000",
+        "totalUsd": 0.000926244,
+        "perSubscriberUsd": 0.000926244,
+        "pctOf20UsdCyclePerSubscriber": 0.00463122
+      },
+      "assumedMainnetL2Only": {
+        "l2ExecutionWei": "514580000000",
+        "totalUsd": 0.00154374,
+        "perSubscriberUsd": 0.00154374,
+        "pctOf20UsdCyclePerSubscriber": 0.0077187,
+        "l1DataFeeExcluded": true
+      }
+    },
+    {
+      "op": "withdraw",
+      "gas": 69111,
+      "gasSource": "gas_report median execution gas + 21,000 intrinsic (calldata gas not included)",
+      "subscribersCovered": 1,
+      "baseSepolia": {
+        "l2ExecutionWei": "414666000000",
+        "l1DataFeeWei": null,
+        "totalWei": "414666000000",
+        "totalUsd": 0.001243998,
+        "perSubscriberUsd": 0.001243998,
+        "pctOf20UsdCyclePerSubscriber": 0.00621999
+      },
+      "assumedMainnetL2Only": {
+        "l2ExecutionWei": "691110000000",
+        "totalUsd": 0.00207333,
+        "perSubscriberUsd": 0.00207333,
+        "pctOf20UsdCyclePerSubscriber": 0.01036665,
+        "l1DataFeeExcluded": true
+      }
+    },
+    {
+      "op": "createPlan",
+      "gas": 182973,
+      "gasSource": "gas_report median execution gas + 21,000 intrinsic (calldata gas not included)",
+      "subscribersCovered": 1,
+      "baseSepolia": {
+        "l2ExecutionWei": "1097838000000",
+        "l1DataFeeWei": null,
+        "totalWei": "1097838000000",
+        "totalUsd": 0.0032935140000000004,
+        "perSubscriberUsd": 0.0032935140000000004,
+        "pctOf20UsdCyclePerSubscriber": 0.016467570000000004
+      },
+      "assumedMainnetL2Only": {
+        "l2ExecutionWei": "1829730000000",
+        "totalUsd": 0.00548919,
+        "perSubscriberUsd": 0.00548919,
+        "pctOf20UsdCyclePerSubscriber": 0.027445949999999997,
+        "l1DataFeeExcluded": true
+      }
+    },
+    {
+      "op": "commitRoot",
+      "gas": 48397,
+      "gasSource": "gas_report median execution gas + 21,000 intrinsic (calldata gas not included)",
+      "subscribersCovered": 1,
+      "baseSepolia": {
+        "l2ExecutionWei": "290382000000",
+        "l1DataFeeWei": null,
+        "totalWei": "290382000000",
+        "totalUsd": 0.0008711459999999999,
+        "perSubscriberUsd": 0.0008711459999999999,
+        "pctOf20UsdCyclePerSubscriber": 0.0043557299999999995
+      },
+      "assumedMainnetL2Only": {
+        "l2ExecutionWei": "483970000000",
+        "totalUsd": 0.0014519099999999998,
+        "perSubscriberUsd": 0.0014519099999999998,
+        "pctOf20UsdCyclePerSubscriber": 0.007259549999999998,
+        "l1DataFeeExcluded": true
+      }
+    }
+  ]
+}

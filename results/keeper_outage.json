@@ -1,0 +1,71 @@
+{
+  "script": "sim/src/outage.ts",
+  "generatedAt": "2026-10-16T04:50:10.514Z",
+  "git": {
+    "commit": "4439796",
+    "dirty": true
+  },
+  "chain": "anvil (scratch, automine) + real keeper process",
+  "plan": {
+    "price": "20000000",
+    "periodSeconds": 180,
+    "graceSeconds": 60
+  },
+  "subscribers": 20,
+  "gracefulShutdown": {
+    "signal": "SIGTERM",
+    "exitCode": 0,
+    "loggedShutdown": true
+  },
+  "outage": {
+    "periods": 3,
+    "stoppedAtChainTime": 1792126389,
+    "restartedAtChainTime": 1792126935,
+    "outageSeconds": 546,
+    "chargesDuringOutage": 0
+  },
+  "recovery": {
+    "chargesRecovered": 60,
+    "expectedRecovered": 60,
+    "catchUpWallSeconds": 1.027,
+    "keeperTxsDuringRecovery": 3,
+    "maxDriftSeconds": 368
+  },
+  "totals": {
+    "expectedCharges": 100,
+    "actualCharges": 100,
+    "lost": 0
+  },
+  "anchoredScheduleHolds": true,
+  "lapsed": 0,
+  "nextChargeAtSequence": {
+    "note": "sub #1: every charge settles the next anchored slot startedAt + k·period, even when executed late",
+    "startedAt": 1792126207,
+    "charges": [
+      {
+        "scheduledAt": 1792126387,
+        "executedAt": 1792126389,
+        "driftSeconds": 2,
+        "txHash": "0x1eab85cf7a4266917fa7822b8baff7523aeae6095d037d3288c7c766996e71ef"
+      },
+      {
+        "scheduledAt": 1792126567,
+        "executedAt": 1792126935,
+        "driftSeconds": 368,
+        "txHash": "0x035d79722832a4cc0a02debcaf367cb317089e2d4f523e34a83aa8d9549b0ed8"
+      },
+      {
+        "scheduledAt": 1792126747,
+        "executedAt": 1792126935,
+        "driftSeconds": 188,
+        "txHash": "0x0f9dc6ba15afae628d6baf963579ddc5f9cf290d572309e21de89238d268ae26"
+      },
+      {
+        "scheduledAt": 1792126927,
+        "executedAt": 1792126935,
+        "driftSeconds": 8,
+        "txHash": "0xe0c3001296d8277f8d6ee0542195e55f894295608d9d4d5e34fb2808d910d9d9"
+      }
+    ]
+  }
+}

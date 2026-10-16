@@ -21,7 +21,12 @@ const HEALTH_PORT = Number(env("HEALTH_PORT", "8788"));
 const account = privateKeyToAccount(env("KEEPER_PRIVATE_KEY") as Hex);
 
 const chain = chainFor(CHAIN_ID, RPC_URL);
-const dep = getDeployment(CHAIN_ID);
+// VAULT_ADDRESS / MUSDC_ADDRESS override the shared deployment (used by sim/outage.ts against a scratch chain).
+const shared = process.env.VAULT_ADDRESS ? null : getDeployment(CHAIN_ID);
+const dep = {
+  SubscriptionVault: (process.env.VAULT_ADDRESS ?? shared!.SubscriptionVault) as `0x${string}`,
+  MockUSDC: (process.env.MUSDC_ADDRESS ?? shared!.MockUSDC) as `0x${string}`,
+};
 const publicClient = createPublicClient({ chain, transport: http(RPC_URL, { batch: true }) });
 const walletClient = createWalletClient({ chain, account, transport: http(RPC_URL) });
 const here = dirname(fileURLToPath(import.meta.url));
@@ -32,7 +37,7 @@ const keeper = new Keeper({
   walletClient,
   vault: dep.SubscriptionVault,
   batchSize: BATCH_SIZE,
-  logFile: join(here, "..", "logs", `keeper-${CHAIN_ID}.jsonl`),
+  logFile: process.env.KEEPER_LOG_FILE ?? join(here, "..", "logs", `keeper-${CHAIN_ID}.jsonl`),
   log,
 });
 

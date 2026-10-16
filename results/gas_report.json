@@ -1,0 +1,102 @@
+{
+  "script": "sim/src/gas-report.ts",
+  "generatedAt": "2026-10-16T04:46:17.519Z",
+  "git": {
+    "commit": "4439796",
+    "dirty": true
+  },
+  "command": "forge test --gas-report --json --no-match-path 'test/invariant/*' --no-match-test 'testFuzz_'",
+  "note": "Execution gas per call as measured by Foundry across unit tests (includes reverting calls in tests). Excludes 21,000 intrinsic + calldata gas. chargeBatch varies with batch size; see batch_sweep.json.",
+  "ops": {
+    "createPlan": {
+      "contract": "PlanRegistry",
+      "signature": "createPlan(address,uint96,uint32,uint32,address,string)",
+      "calls": 63,
+      "min": 23226,
+      "avg": 147209,
+      "median": 161973,
+      "max": 161973
+    },
+    "subscribeWithPermit": {
+      "contract": "SubscriptionVault",
+      "signature": "subscribeWithPermit(uint256,uint256,uint256,uint8,bytes32,bytes32)",
+      "calls": 3,
+      "min": 213051,
+      "avg": 252454,
+      "median": 253892,
+      "max": 290419
+    },
+    "subscribe": {
+      "contract": "SubscriptionVault",
+      "signature": "subscribe(uint256)",
+      "calls": 43,
+      "min": 36446,
+      "avg": 204235,
+      "median": 241640,
+      "max": 241640
+    },
+    "charge": {
+      "contract": "SubscriptionVault",
+      "signature": "charge(uint256)",
+      "calls": 30,
+      "min": 29057,
+      "avg": 61712,
+      "median": 46360,
+      "max": 94772
+    },
+    "chargeBatch": {
+      "contract": "SubscriptionVault",
+      "signature": "chargeBatch(uint256[])",
+      "calls": 4,
+      "min": 27118,
+      "avg": 61279,
+      "median": 49704,
+      "max": 118593
+    },
+    "cancel": {
+      "contract": "SubscriptionVault",
+      "signature": "cancel(uint256)",
+      "calls": 10,
+      "min": 23762,
+      "avg": 28689,
+      "median": 30458,
+      "max": 30498
+    },
+    "withdraw": {
+      "contract": "SubscriptionVault",
+      "signature": "withdraw(address)",
+      "calls": 4,
+      "min": 29149,
+      "avg": 48111,
+      "median": 48111,
+      "max": 67074
+    },
+    "commitRoot": {
+      "contract": "UsageRootRegistry",
+      "signature": "commitRoot(uint256,uint64,bytes32,uint64,uint128,string)",
+      "calls": 5,
+      "min": 25044,
+      "avg": 58681,
+      "median": 27397,
+      "max": 118440
+    }
+  },
+  "deployments": {
+    "MockUSDC": {
+      "gas": 0,
+      "size": 5002
+    },
+    "PlanRegistry": {
+      "gas": 0,
+      "size": 2827
+    },
+    "SubscriptionVault": {
+      "gas": 0,
+      "size": 7644
+    },
+    "UsageRootRegistry": {
+      "gas": 0,
+      "size": 3611
+    }
+  }
+}
