@@ -1,0 +1,219 @@
+{
+  "script": "sim/src/lifecycle.ts",
+  "generatedAt": "2026-10-16T07:10:06.145Z",
+  "git": {
+    "commit": "a277c9d",
+    "dirty": true
+  },
+  "chainId": 11155111,
+  "rpc": "https://ethereum-sepolia-rpc.publicnode.com",
+  "explorer": "https://sepolia.etherscan.io",
+  "subscriber": "0x6B8d840F5982faF22F5F2bfD0545A44eBbFB9F4A",
+  "keeper": "0x9EE946ea5d8aDf194295a1a951bCd2F9C7CD2159",
+  "planId": "1",
+  "subId": "1",
+  "contracts": {
+    "MockUSDC": "0x75e8B2f30a7c08cf3967A2745dFAb0CF418Ced96",
+    "PlanRegistry": "0x9109E3Af83D6499E4d433128B60CDAc5505Cc815",
+    "SubscriptionVault": "0x9bC880415C54122cB64463888Db6a94Bf285dB8a",
+    "UsageRootRegistry": "0x3fF143e67616114B4F638b332BaF060Cb8e8696C",
+    "gateway": "0x6c9e15ce9e9B812d7746DDab4926b2eBFE9fade2",
+    "deployer": "0xdb0C7Acf5560eA87eD7D5D7C570dF21092ac62E7",
+    "keeperFeeBps": 25,
+    "startBlock": 11925719,
+    "demoPlanId": 1,
+    "prodPlanId": 2
+  },
+  "steps": [
+    {
+      "step": "subscribeWithPermit",
+      "txHash": "0x4d3f5e74a18eb936f3784a1e8fc8529ebc939a3868910140dd227a938c89aaac",
+      "explorerUrl": "https://sepolia.etherscan.io/tx/0x4d3f5e74a18eb936f3784a1e8fc8529ebc939a3868910140dd227a938c89aaac",
+      "events": [
+        "Subscribed"
+      ],
+      "blockNumber": 11925769,
+      "blockTimestamp": 1792133676,
+      "gasUsed": 1169819,
+      "txStatus": "success",
+      "chainTime": 1792133676,
+      "status": "Active",
+      "entitled": true,
+      "chargeCount": 1,
+      "nextChargeAt": 1792133856,
+      "pastDueSince": 0,
+      "balance": "980000000",
+      "stateSource": "eth_call getSubscription/isEntitled/balanceOf at block 11925769 (the script's original snapshot ran before it knew the new subId; fixed in sim/src/lifecycle.ts)"
+    },
+    {
+      "step": "keeper charge",
+      "txHash": "0x388e2e3e274fedd10fe1d6e493ea6b0a603b92c798ef5ceeefea651dc2c73f3b",
+      "explorerUrl": "https://sepolia.etherscan.io/tx/0x388e2e3e274fedd10fe1d6e493ea6b0a603b92c798ef5ceeefea651dc2c73f3b",
+      "events": [
+        "Charged"
+      ],
+      "blockNumber": 11925786,
+      "blockTimestamp": 1792133880,
+      "gasUsed": 210352,
+      "txStatus": "success",
+      "chainTime": 1792133880,
+      "status": "Active",
+      "entitled": true,
+      "chargeCount": 2,
+      "nextChargeAt": 1792134036,
+      "pastDueSince": 0,
+      "balance": "960000000"
+    },
+    {
+      "step": "keeper charge",
+      "txHash": "0x86da8d2b350c58709dfef986a80a339c7bc33b07a8f5c4a43a34279bfe21f851",
+      "explorerUrl": "https://sepolia.etherscan.io/tx/0x86da8d2b350c58709dfef986a80a339c7bc33b07a8f5c4a43a34279bfe21f851",
+      "events": [
+        "Charged"
+      ],
+      "blockNumber": 11925798,
+      "blockTimestamp": 1792134048,
+      "gasUsed": 112432,
+      "txStatus": "success",
+      "chainTime": 1792134048,
+      "status": "Active",
+      "entitled": true,
+      "chargeCount": 3,
+      "nextChargeAt": 1792134216,
+      "pastDueSince": 0,
+      "balance": "940000000"
+    },
+    {
+      "step": "keeper charge",
+      "txHash": "0xf0a39e9501261b41f9edb3fadf91c051be13b4c7febf35bc12e267af5b4473ce",
+      "explorerUrl": "https://sepolia.etherscan.io/tx/0xf0a39e9501261b41f9edb3fadf91c051be13b4c7febf35bc12e267af5b4473ce",
+      "events": [
+        "Charged"
+      ],
+      "blockNumber": 11925815,
+      "blockTimestamp": 1792134264,
+      "gasUsed": 112432,
+      "txStatus": "success",
+      "chainTime": 1792134264,
+      "status": "Active",
+      "entitled": true,
+      "chargeCount": 4,
+      "nextChargeAt": 1792134396,
+      "pastDueSince": 0,
+      "balance": "920000000"
+    },
+    {
+      "step": "drain balance",
+      "txHash": "0x89dde093e971ea81ba63ff3bfcdbda6086c5d7c3c0e7ec9c6b0caf8263c59889",
+      "explorerUrl": "https://sepolia.etherscan.io/tx/0x89dde093e971ea81ba63ff3bfcdbda6086c5d7c3c0e7ec9c6b0caf8263c59889",
+      "events": [],
+      "blockNumber": 11925818,
+      "blockTimestamp": 1792134300,
+      "gasUsed": 128922,
+      "txStatus": "success",
+      "chainTime": 1792134300,
+      "status": "Active",
+      "entitled": true,
+      "chargeCount": 4,
+      "nextChargeAt": 1792134396,
+      "pastDueSince": 0,
+      "balance": "0"
+    },
+    {
+      "step": "keeper charge",
+      "txHash": "0x8d4b19ef76ee0b51a3956a2aa29e183b6164bf40f08ed2b231992ae5a72f6df1",
+      "explorerUrl": "https://sepolia.etherscan.io/tx/0x8d4b19ef76ee0b51a3956a2aa29e183b6164bf40f08ed2b231992ae5a72f6df1",
+      "events": [
+        "ChargeFailed"
+      ],
+      "blockNumber": 11925827,
+      "blockTimestamp": 1792134408,
+      "gasUsed": 45160,
+      "txStatus": "success",
+      "chainTime": 1792134408,
+      "status": "PastDue",
+      "entitled": true,
+      "chargeCount": 4,
+      "nextChargeAt": 1792134396,
+      "pastDueSince": 1792134396,
+      "balance": "0"
+    },
+    {
+      "step": "top up (mint 100)",
+      "txHash": "0x74c5d44b4a7dae326d1163dffcefa09677f5c1a9acf02980388315cc4d920563",
+      "explorerUrl": "https://sepolia.etherscan.io/tx/0x74c5d44b4a7dae326d1163dffcefa09677f5c1a9acf02980388315cc4d920563",
+      "events": [],
+      "blockNumber": 11925828,
+      "blockTimestamp": 1792134420,
+      "gasUsed": 140615,
+      "txStatus": "success",
+      "chainTime": 1792134420,
+      "status": "PastDue",
+      "entitled": true,
+      "chargeCount": 4,
+      "nextChargeAt": 1792134396,
+      "pastDueSince": 1792134396,
+      "balance": "100000000"
+    },
+    {
+      "step": "keeper charge",
+      "txHash": "0xdba7effd4ada6d30d69a59dc0b93bb943176b1448ef0ab3467ec432967441787",
+      "explorerUrl": "https://sepolia.etherscan.io/tx/0xdba7effd4ada6d30d69a59dc0b93bb943176b1448ef0ab3467ec432967441787",
+      "events": [
+        "Charged"
+      ],
+      "blockNumber": 11925830,
+      "blockTimestamp": 1792134444,
+      "gasUsed": 112472,
+      "txStatus": "success",
+      "chainTime": 1792134444,
+      "status": "Active",
+      "entitled": true,
+      "chargeCount": 5,
+      "nextChargeAt": 1792134576,
+      "pastDueSince": 0,
+      "balance": "80000000"
+    },
+    {
+      "step": "cancel",
+      "txHash": "0xd6efc31eebeda3ac4b89932454066351c0ad4fcdced99f7197465d0575088590",
+      "explorerUrl": "https://sepolia.etherscan.io/tx/0xd6efc31eebeda3ac4b89932454066351c0ad4fcdced99f7197465d0575088590",
+      "events": [
+        "Cancelled"
+      ],
+      "blockNumber": 11925832,
+      "blockTimestamp": 1792134468,
+      "gasUsed": 31658,
+      "txStatus": "success",
+      "chainTime": 1792134468,
+      "status": "Cancelled",
+      "entitled": true,
+      "chargeCount": 5,
+      "nextChargeAt": 1792134576,
+      "pastDueSince": 0,
+      "balance": "80000000"
+    },
+    {
+      "step": "after cancel (before paid-through)",
+      "txHash": null,
+      "chainTime": 1792134468,
+      "status": "Cancelled",
+      "entitled": true,
+      "chargeCount": 5,
+      "nextChargeAt": 1792134576,
+      "pastDueSince": 0,
+      "balance": "80000000"
+    },
+    {
+      "step": "after paid-through",
+      "txHash": null,
+      "chainTime": 1792134600,
+      "status": "Cancelled",
+      "entitled": false,
+      "chargeCount": 5,
+      "nextChargeAt": 1792134576,
+      "pastDueSince": 0,
+      "balance": "80000000"
+    }
+  ]
+}

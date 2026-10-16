@@ -50,7 +50,10 @@ async function tx(step: string, w: typeof ws, req: any) {
   const rc = await pub.waitForTransactionReceipt({ hash });
   const block = await pub.getBlock({ blockNumber: rc.blockNumber });
   const after = await state();
-  const events = parseEventLogs({ abi: subscriptionVaultAbi, logs: rc.logs }).map((e) => e.eventName);
+  const parsed = parseEventLogs({ abi: subscriptionVaultAbi, logs: rc.logs });
+  const subscribed = parsed.find((e) => e.eventName === "Subscribed");
+  if (subscribed) subId = (subscribed.args as { subId: bigint }).subId; // know the new sub before snapshotting state
+  const events = parsed.map((e) => e.eventName);
   const row = { step, txHash: hash, explorerUrl: EXPLORER ? `${EXPLORER}/tx/${hash}` : null, events, blockNumber: Number(rc.blockNumber), blockTimestamp: Number(block.timestamp), gasUsed: Number(rc.gasUsed), txStatus: rc.status, ...after };
   steps.push(row);
   console.log(`${step}: ${after.status} entitled=${after.entitled} charges=${after.chargeCount} gas=${rc.gasUsed} ${hash}`);
